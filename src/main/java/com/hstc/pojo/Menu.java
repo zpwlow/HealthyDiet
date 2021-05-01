@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +20,8 @@ public class Menu {
     private String make_time;
     private String diseases;
     private String menu_url;
+    private List<MenuEffect> menuEffectList;
+    private List<MenuIngredients> menuIngredientsList;
+    private List<MenuMake> menuMakeList;
+    private List<MenuNutrient> menuNutrientList;
 }

@@ -21,23 +21,15 @@ public class AdminController {
      * 用户登录
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String userName,String password, Model model,
+    public String login(String userName, String password,Boolean rememberMe, Model model,
                         HttpSession session) {
         // 通过账号和密码查询用户
-        System.out.println("session==>"+session);
         Admin admin = adminService.findAdmin(userName, password);
-        System.out.println("查找的用户"+admin);
+        System.out.println("查找的用户"+rememberMe);
         if(admin != null){
             // 将用户对象添加到Session
             session.setAttribute("USER_SESSION", admin);
-            /*//是否勾选了记住密码
-            boolean isPwdRemember = Boolean.parseBoolean(req.getParameter("pwdRemember"));
-            if(isPwdRemember){
-                //将用户名和密码放入cookie
-                Cookie rememberUserCookie = new Cookie("rememberUser",username+"&"+pwd);
-                rememberUserCookie.setMaxAge(20);//设置有效时间为20秒
-                resp.addCookie(rememberUserCookie);
-            }*/
+
             // 跳转到主页面
 			return "menu";
 //            return "redirect:/menu/list";

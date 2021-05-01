@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" class="login-content" data-ng-app="materialAdmin">
+
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,10 +28,12 @@
 			}
 			return document.getElementById('_form').submit();
 		}
+
 	</script>
 
 </head>
 <body class="login-content" data-ng-controller="loginCtrl as lctrl">
+
 
 <div class="lc-block" id="l-login" data-ng-class="{'toggled':lctrl.login === 1}">
 	<h1 class="lean">管理员</h1>
@@ -41,7 +45,8 @@
 					<i class="zmdi zmdi-account"></i>
 				</span>
 			<div class="fg-line">
-				<input id="userName" type="text" name="userName" class="form-control" placeholder="账号" regex="^\w{3,16}$"/>
+				<input id="userName" type="text" name="userName"
+					   class="form-control" placeholder="账号" regex="^\w{3,16}$"/>
 			</div>
 		</div>
 
@@ -50,7 +55,8 @@
 					<i class="zmdi zmdi-male"></i>
 				</span>
 			<div class="fg-line">
-				<input id="password" type="password" name="password" class="form-control" placeholder="密码" regex="^\w+"/>
+				<input id="password" type="password" name="password"
+					   class="form-control" placeholder="密码" regex="^\w+"/>
 			</div>
 		</div>
 
@@ -63,9 +69,9 @@
 
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" value="" />
+				<input type="checkbox" name="rememberMe"  />
 				<i class="input-helper">
-					保持登录状态
+					记住密码
 				</i>
 			</label>
 		</div>
