@@ -20,6 +20,12 @@
                     foreignColumn="menuId"
                     select="com.hstc.dao.MenuEffectMapper.getMenuEffectListByMid"
                     fetchType="lazy"/>
+        <collection property="menuIngredientsList"
+                    ofType="com.hstc.pojo.MenuIngredients"
+                    column="menu_id"
+                    foreignColumn="menuId"
+                    select="com.hstc.dao.MenuIngredientsMapper.getMenuIngredientsListByMid"
+                    fetchType="lazy"/>
 
     </resultMap>
 
