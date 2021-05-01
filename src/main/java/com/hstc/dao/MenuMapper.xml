@@ -26,6 +26,19 @@
                     foreignColumn="menuId"
                     select="com.hstc.dao.MenuIngredientsMapper.getMenuIngredientsListByMid"
                     fetchType="lazy"/>
+        <collection property="menuNutrientList"
+                    ofType="com.hstc.pojo.MenuNutrient"
+                    column="menu_id"
+                    foreignColumn="menuId"
+                    select="com.hstc.dao.MenuNutrientMapper.getMenuNutrientListByMid"
+                    fetchType="lazy"/>
+        <collection property="menuMakeList"
+                    ofType="com.hstc.pojo.MenuMake"
+                    column="menu_id"
+                    foreignColumn="menuId"
+                    select="com.hstc.dao.MenuMakeMapper.getMenuMakeListByMid"
+                    fetchType="lazy"/>
+
 
     </resultMap>
 

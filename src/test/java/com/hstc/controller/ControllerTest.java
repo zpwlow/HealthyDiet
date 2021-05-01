@@ -21,7 +21,7 @@ public class ControllerTest {
 
     @Test
     public void selectMenuByIdTest(){
-        Menu menu = menuService.queryMenuById(1);
+        Menu menu = menuService.queryMenuById(2);
         System.out.println("菜谱："+menu);
 
     }

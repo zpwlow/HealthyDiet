@@ -23,6 +23,6 @@ public class Menu {
     private String menu_url;
     private List<MenuEffect> menuEffectList;
     private List<MenuIngredients> menuIngredientsList;
-    private List<MenuMake> menuMakeList;
     private List<MenuNutrient> menuNutrientList;
+    private List<MenuMake> menuMakeList;
 }
