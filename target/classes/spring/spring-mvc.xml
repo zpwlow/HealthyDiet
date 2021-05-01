@@ -18,7 +18,7 @@
 
 
     <!-- 4.扫描web controller相关的bean -->
-    <context:component-scan base-package="com.hstc.controller" />
+    <context:component-scan base-package="com.hstc.comtroller.ControllerTest" />
 
     <!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
     <mvc:resources location="js/" mapping="/js/**" />

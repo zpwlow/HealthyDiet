@@ -4,5 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.MenuMapper">
 
+    <!-- collection  cloumn为一对多的 多表的主键 foreignColum以一表的外键-->
+    <resultMap id="menuMap" type="com.hstc.pojo.Menu" autoMapping="true">
+        <id column="menu_id" property="menu_id"/>
+        <result column="menu_name" property="menu_name"/>
+        <result column="flavor" property="flavor"/>
+        <result column="calorie" property="calorie"/>
+        <result column="technology" property="technology"/>
+        <result column="make_time" property="make_time"/>
+        <result column="diseases" property="diseases"/>
+        <result column="menu_url" property="menu_url"/>
+        <collection property="menuEffectList"
+                    ofType="com.hstc.pojo.MenuEffect"
+                    column="id"
+                    foreignColumn="menuId"
+                    select="com.hstc.dao.MenuEffectMapper.getMenuEffectListByMid"
+                    fetchType="lazy"/>
+
+    </resultMap>
+
+    <select id="queryMenuById" parameterType="int" resultMap="menuMap">
+        select *
+        from menu
+        where menu_id = #{menuId}
+    </select>
+
 
 </mapper>

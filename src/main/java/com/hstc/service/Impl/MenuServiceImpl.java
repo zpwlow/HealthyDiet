@@ -17,32 +17,32 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
 
     @Override
-    public int addMenu(Menu menu) {
-        return 0;
-    }
-
-    @Override
-    public int deleteMenu(int id) {
-        return 0;
-    }
-
-    @Override
-    public int updateMenu(Menu menu) {
-        return 0;
-    }
-
-    @Override
     public Menu queryMenuById(int id) {
-        return null;
+        return this.menuMapper.queryMenuById(id);
     }
 
-    @Override
-    public List<Menu> queryAllMenu() {
-        return null;
-    }
-
-    @Override
-    public Menu queryMenuByName(String menu_name) {
-        return null;
-    }
+//    @Override
+//    public int addMenu(Menu menu) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int deleteMenu(int id) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int updateMenu(Menu menu) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public List<Menu> queryAllMenu() {
+//        return null;
+//    }
+//
+//    @Override
+//    public Menu queryMenuByName(String menu_name) {
+//        return null;
+//    }
 }
