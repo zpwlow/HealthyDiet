@@ -16,6 +16,7 @@ public class Menu {
     private int menu_id;
     private String menu_name;
     private String flavor;
+    private String calorie;
     private String technology;
     private String make_time;
     private String diseases;

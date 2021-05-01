@@ -16,7 +16,7 @@
         <result column="menu_url" property="menu_url"/>
         <collection property="menuEffectList"
                     ofType="com.hstc.pojo.MenuEffect"
-                    column="id"
+                    column="menu_id"
                     foreignColumn="menuId"
                     select="com.hstc.dao.MenuEffectMapper.getMenuEffectListByMid"
                     fetchType="lazy"/>

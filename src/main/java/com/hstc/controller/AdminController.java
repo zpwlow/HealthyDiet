@@ -21,18 +21,17 @@ public class AdminController {
      * 用户登录
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String userName, String password,Boolean rememberMe, Model model,
+    public String login(String userName, String password, Model model,
                         HttpSession session) {
         // 通过账号和密码查询用户
         Admin admin = adminService.findAdmin(userName, password);
-        System.out.println("查找的用户"+rememberMe);
+        System.out.println("查找的用户"+admin);
         if(admin != null){
             // 将用户对象添加到Session
             session.setAttribute("USER_SESSION", admin);
-
             // 跳转到主页面
-			return "menu";
-//            return "redirect:/menu/list";
+//			return "menu";
+            return "redirect:/menu/byId";
         }
         model.addAttribute("msg", "账号或密码错误，请重新输入！");
         // 返回到登录页面
