@@ -17,8 +17,8 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
 
     @Override
-    public Menu queryMenuById(int id) {
-        return this.menuMapper.queryMenuById(id);
+    public List<Menu> queryMenuByName(String menuName) {
+        return this.menuMapper.queryMenuByName(menuName);
     }
 
 //    @Override

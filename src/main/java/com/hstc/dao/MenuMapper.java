@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MenuMapper {
     //根据id查询，返回一个Menu
-    Menu queryMenuById(@Param("menuId") int id);
+    List<Menu> queryMenuByName(@Param("menuName") String menuName);
 
 //    //增加一个菜单
 //   int addMenu(Menu menu);

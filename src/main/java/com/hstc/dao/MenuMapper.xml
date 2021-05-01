@@ -42,10 +42,10 @@
 
     </resultMap>
 
-    <select id="queryMenuById" parameterType="int" resultMap="menuMap">
+    <select id="queryMenuByName"  resultMap="menuMap">
         select *
         from menu
-        where menu_id = #{menuId}
+        where menu_name like #{menuName}
     </select>
 
 

@@ -7,7 +7,7 @@ import java.util.List;
 public interface MenuService {
 
     //根据id查询，返回一个Menu
-    Menu queryMenuById(int id);
+    List<Menu> queryMenuByName(String menuName);
 
 //    //增加一个菜单
 //    int addMenu(Menu menu);

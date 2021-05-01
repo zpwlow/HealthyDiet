@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.List;
+
 
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
@@ -21,8 +23,9 @@ public class ControllerTest {
 
     @Test
     public void selectMenuByIdTest(){
-        Menu menu = menuService.queryMenuById(2);
-        System.out.println("菜谱："+menu);
+        String menuName = "%" + "奶香豌豆" +"%";
+        List<Menu> menuList = menuService.queryMenuByName(menuName);
+        System.out.println("菜谱："+menuList);
 
     }
 }
