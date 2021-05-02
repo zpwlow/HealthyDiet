@@ -35,11 +35,11 @@ public class ReqMenuController {
             Result result = new Result(404,"资源不存在",null);
         }
         Result result = new Result(200,"成功",menuList);
-        System.out.println("菜谱："+menuList);
+//        System.out.println("菜谱："+menuList);
         //将List转换成json数据
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(result);
-        System.out.println("Json："+json);
+//        System.out.println("Json："+json);
         return json;
     }
 

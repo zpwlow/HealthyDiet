@@ -1,23 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="en" class="login-content" data-ng-app="materialAdmin">
 
-<html lang="en">
 
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>登录界面</title>
-	<meta name="description" content="这是一个 index 页面">
-	<meta name="keywords" content="index">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="renderer" content="webkit">
-	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<link rel="icon" type="image/png" href="i/logo.png">
-	<link rel="apple-touch-icon-precomposed" href="i/logo.png">
-	<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-	<link rel="stylesheet" href="css/amazeui.min.css" />
-	<link rel="stylesheet" href="css/amazeui.datatables.min.css" />
-	<link rel="stylesheet" href="css/app.css">
-	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<title>登录页面</title>
+
+	<!-- Vendor CSS -->
+	<link href="css/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css">
+	<!-- CSS -->
+	<link href="css/app.min.1.css" rel="stylesheet" type="text/css">
 
 	<script>
 		// 判断是登录账号和密码是否为空
@@ -35,62 +32,92 @@
 	</script>
 
 </head>
-<body data-type="login">
-<script src="js/theme.js"></script>
-<div class="am-g tpl-g">
+<body class="login-content" data-ng-controller="loginCtrl as lctrl">
 
-	<!-- 风格切换 -->
-	<div class="tpl-skiner">
-		<div class="tpl-skiner-toggle am-icon-cog">
-		</div>
-		<div class="tpl-skiner-content">
-			<div class="tpl-skiner-content-title">
-				选择主题
+
+<div class="lc-block" id="l-login" data-ng-class="{'toggled':lctrl.login === 1}">
+	<h1 class="lean">管理员</h1>
+
+	<form id="_form" action="${pageContext.request.contextPath }/admin/login" method="post">
+
+		<div class="input-group m-b-20">
+				<span class="input-group-addon">
+					<i class="zmdi zmdi-account"></i>
+				</span>
+			<div class="fg-line">
+				<input id="userName" type="text" name="userName"
+					   class="form-control" placeholder="账号" regex="^\w{3,16}$"/>
 			</div>
-			<div class="tpl-skiner-content-bar">
-				<span class="skiner-color skiner-white" data-color="theme-white"></span>
-				<span class="skiner-color skiner-black" data-color="theme-black"></span>
+		</div>
+
+		<div class="input-group m-b-20">
+				<span class="input-group-addon">
+					<i class="zmdi zmdi-male"></i>
+				</span>
+			<div class="fg-line">
+				<input id="password" type="password" name="password"
+					   class="form-control" placeholder="密码" regex="^\w+"/>
 			</div>
 		</div>
-	</div>
 
-	<div class="tpl-login">
-		<div class="tpl-login-content">
-			<div class="tpl-login-logo">
-			</div>
+		<div class="clearfix"></div>
 
-			<form class="am-form tpl-form-line-form" id="_form" action="${pageContext.request.contextPath }/admin/login" method="post">
-				<div class="am-form-group">
-					<input type="text" class="tpl-form-input" id="userName" name="userName" placeholder="请输入账号">
+		<font color="red">
+			<%-- 提示信息--%>
+			<span id="message">${msg}</span>
+		</font>
 
-				</div>
-
-				<div class="am-form-group">
-					<input type="password" class="tpl-form-input" id="password" name="password" placeholder="请输入密码">
-
-				</div>
-				<div class="am-form-group tpl-login-remember-me">
-					<input id="remember-me" type="checkbox">
-					<label for="remember-me">
-
-						记住密码
-					</label>
-
-				</div>
-
-
-				<div class="am-form-group">
-
-					<button onclick="check()" type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
-
-				</div>
-			</form>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="rememberMe"  />
+				<i class="input-helper">
+					记住密码
+				</i>
+			</label>
 		</div>
-	</div>
+
+		<a onclick="check()"
+		   class="btn btn-login btn-danger btn-float">
+			<i class="zmdi zmdi-arrow-forward"></i>
+		</a>
+	</form>
+
+	<ul class="login-navigation">
+		<li class="bgm-red" ></li>
+		<li class="bgm-orange"></li>
+	</ul>
 </div>
-<script src="http://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
-<script src="js/app.js"></script>
+
 
 </body>
 
+<script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+<!-- Angular -->
+<script src="js/bower_components/angular/angular.min.js"></script>
+<script src="js/bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="js/bower_components/angular-animate/angular-animate.min.js"></script>
+
+
+<!-- Angular Modules -->
+<script src="js/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="js/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+<script src="js/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script src="js/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<!-- Common js -->
+<script src="js/bower_components/angular-nouislider/src/nouislider.min.js"></script>
+<script src="js/bower_components/ng-table/dist/ng-table.min.js"></script>
+
+<!-- Placeholder for IE9 -->
+<!--[if IE 9 ]>
+<script src="js/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+<!-- App level -->
+<script src="js/app.js"></script>
+<script src="js/controllers/main.js"></script>
+<script src="js/controllers/ui-bootstrap.js"></script>
+
+
+<!-- Template Modules -->
+<script src="js/modules/form.js"></script>
 </html>
