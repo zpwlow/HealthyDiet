@@ -38,4 +38,6 @@ public class Menu {
     private List<MenuNutrient> menuNutrientList;
     @Expose
     private List<MenuMake> menuMakeList;
+    private Integer start;            // 起始行
+    private Integer rows;             // 所取行数
 }

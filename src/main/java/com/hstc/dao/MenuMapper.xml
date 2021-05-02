@@ -48,5 +48,20 @@
         where menu_name like #{menuName}
     </select>
 
+    <select id="queryAllMenu"  resultMap="menuMap">
+        select *
+        from menu
+        <!-- 执行分页查询 -->
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <!-- 查询客户总数 -->
+    <select id="selectMenuListCount" parameterType="menu"
+            resultType="Integer">
+        select count(*) from menu
+    </select>
+
 
 </mapper>

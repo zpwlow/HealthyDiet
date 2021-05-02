@@ -1,39 +1,28 @@
 package com.hstc.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hstc.pojo.Menu;
 import com.hstc.service.MenuService;
+import com.hstc.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
-
     @Autowired
     private MenuService menuService;
 
-    /**
-     * 用户登录
-     */
-    @RequestMapping(value = "/queryByMname")
-    public String selectMenuByName(@RequestParam("name") String name, Model model){
-        String menuName = "%" + name +"%";
-        List<Menu> menuList = menuService.queryMenuByName(menuName);
-        System.out.println("菜谱："+menuList);
-        //将List转换成json数据
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        String json = gson.toJson(menuList);
-        System.out.println("菜谱："+json);
+    @RequestMapping(value = "/list")
+    public String queryMenuAll(@RequestParam(defaultValue="1")Integer page,
+                               @RequestParam(defaultValue="10")Integer rows, Model model) {
+
+        Page<Menu> menuPage = menuService.queryAllMenu(page, rows);
+        model.addAttribute("page", menuPage);
         return "menu";
     }
-
 
 }

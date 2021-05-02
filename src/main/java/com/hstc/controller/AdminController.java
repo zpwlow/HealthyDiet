@@ -31,7 +31,7 @@ public class AdminController {
             session.setAttribute("USER_SESSION", admin);
             // 跳转到主页面
 //			return "menu";
-            return "redirect:/menu/byId";
+            return "redirect:/menu/list";
         }
         model.addAttribute("msg", "账号或密码错误，请重新输入！");
         // 返回到登录页面
@@ -41,9 +41,9 @@ public class AdminController {
     /**
      * 模拟其他类中跳转到客户管理页面的方法
      */
-    @RequestMapping(value = "/toCustomer")
-    public String toCustomer() {
-        return "customer";
+    @RequestMapping(value = "/toMenu")
+    public String toMenu() {
+        return "menu";
     }
     /**
      * 退出登录
