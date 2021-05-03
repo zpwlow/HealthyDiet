@@ -7,6 +7,6 @@ public interface AdminMapper {
     /**
      * 通过账号和密码查询用户
      */
-    public Admin findAdmin(@Param("userName") String userName,
+    Admin findAdmin(@Param("userName") String userName,
                            @Param("password") String password);
 }
