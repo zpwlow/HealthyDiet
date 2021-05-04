@@ -1,38 +1,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName()
+            + ":" + request.getServerPort() + path + "/";
+%>
+<%-- <%=basePath%> --%>
 
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<%--    <meta http-equiv="X-UA-Compatible" content="IE=edge">--%>
     <title>菜谱列表</title>
 
-    <base href="http://localhost:8080/demo/">
+<%--    <base href="http://localhost:8080/demo/">--%>
 
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="i/logo.png">
-    <link rel="apple-touch-icon-precomposed" href="i/app-icon72x72@2x.png">
+    <link rel="icon" type="image/png" href="<%=basePath%>i/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="<%=basePath%>i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="css/amazeui.min.css" />
-    <link rel="stylesheet" href="css/amazeui.datatables.min.css" />
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="<%=basePath%>css/amazeui.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>css/app.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 
 </head>
 
 <body data-type="widgets">
-<script src="js/theme.js"></script>
+<script src="<%=basePath%>js/theme.js"></script>
 <div class="am-g tpl-g">
     <!-- 头部 -->
     <header>
         <!-- logo -->
         <div class="am-fl tpl-header-logo">
-            <a href="javascript:;"><img src="img/logo.png" alt=""></a>
+            <a href="javascript:;"><img src="<%=basePath%>img/logo.png" alt=""></a>
         </div>
         <!-- 右侧内容 -->
         <div class="tpl-header-fluid">
@@ -68,7 +77,7 @@
                             <li class="tpl-dropdown-menu-messages">
                                 <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                     <div class="menu-messages-ico">
-                                        <img src="img/user04.png" alt="">
+                                        <img src="<%=basePath%>img/user04.png" alt="">
                                     </div>
                                     <div class="menu-messages-time">
                                         1小时前
@@ -87,7 +96,7 @@
                             <li class="tpl-dropdown-menu-messages">
                                 <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                     <div class="menu-messages-ico">
-                                        <img src="img/user02.png" alt="">
+                                        <img src="<%=basePath%>img/user02.png" alt="">
                                     </div>
                                     <div class="menu-messages-time">
                                         3天前
@@ -193,7 +202,7 @@
         <div class="tpl-sidebar-user-panel">
             <div class="tpl-user-panel-slide-toggleable">
                 <div class="tpl-user-panel-profile-picture">
-                    <img src="img/user06.png" alt="">
+                    <img src="<%=basePath%>img/user06.png" alt="">
                 </div>
                 <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
@@ -207,7 +216,7 @@
         <!-- 菜单 -->
         <ul class="sidebar-nav">
             <li class="sidebar-nav-link">
-                <a href="">
+                <a href="javascript:;">
                     <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                 </a>
             </li>
@@ -220,13 +229,13 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
                     <li class="sidebar-nav-link">
-                        <a href="">
+                        <a href="javascript:;">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 文字列表
                         </a>
                     </li>
 
                     <li class="sidebar-nav-link">
-                        <a href="" class="sub-active">
+                        <a href="javascript:;" class="sub-active">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
                         </a>
                     </li>
@@ -234,7 +243,7 @@
             </li>
 
             <li class="sidebar-nav-link">
-                <a href="">
+                <a href="javascript:;">
                     <i class="am-icon-key sidebar-nav-link-logo"></i> 登录
                 </a>
             </li>
@@ -251,7 +260,7 @@
                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                     <div class="widget am-cf">
                         <div class="widget-head am-cf">
-                            <div class="widget-title  am-cf">文章列表</div>
+                            <div class="widget-title  am-cf">菜谱列表</div>
 
 
                         </div>
@@ -294,14 +303,14 @@
                                         <c:forEach items="${page.rows}" var="row">
                                             <tr class="gradeX">
                                                 <td>
-                                                    <img src="img/k.jpg" class="tpl-table-line-img" alt="">
+                                                    <img src="${row.menu_url}" class="tpl-table-line-img" alt="">
                                                 </td>
-                                                <td class="am-text-middle">红烧鱼</td>
-                                                <td class="am-text-middle">酱香味</td>
-                                                <td class="am-text-middle">86</td>
-                                                <td class="am-text-middle">焖</td>
-                                                <td class="am-text-middle"><15分钟</td>
-                                                <td class="am-text-middle">午餐</td>
+                                                <td class="am-text-middle">${row.menu_name}</td>
+                                                <td class="am-text-middle">${row.flavor}</td>
+                                                <td class="am-text-middle">${row.calorie}</td>
+                                                <td class="am-text-middle">${row.technology}</td>
+                                                <td class="am-text-middle">${row.make_time}</td>
+                                                <td class="am-text-middle">${row.diseases}</td>
                                                 <td class="am-text-middle">
                                                     <div class="tpl-table-black-operation">
                                                         <a href="javascript:;">
@@ -321,23 +330,104 @@
                                     </tbody>
                                 </table>
                             </div>
-<%--                            <div class="am-u-lg-12 am-cf">--%>
+                            <div class="am-u-lg-12 am-cf">
 
-<%--                                <div class="am-fr">--%>
-<%--                                    <ul class="am-pagination tpl-pagination">--%>
+                                <div class="am-fr">
+                                    <ul class="am-pagination tpl-pagination">
 <%--                                        <li class="am-disabled"><a href="#">«</a></li>--%>
 <%--                                        <li class="am-active"><a href="#">1</a></li>--%>
-<%--                                        <li><a href="#">2</a></li>--%>
-<%--                                        <li><a href="#">3</a></li>--%>
-<%--                                        <li><a href="#">4</a></li>--%>
-<%--                                        <li><a href="#">5</a></li>--%>
-<%--                                        <li><a href="#">»</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-                            <div class="am-u-lg-12 am-cf">
-                                <itheima:page url="${pageContext.request.contextPath }/menu/list" />
+                                        <%--跳到首页 这里做了判断 如果没有前一页 那么 跳到首页的这个标签是不可点击的 class="disabled" --%>
+                                        <li <c:if test="${!page.hasPreviouse}">class="am-disabled"</c:if> >
+                                            <a href="?start=0">
+                                                <span> << </span>
+                                            </a>
+                                        </li>
+                                        <%--跳到前一页 同样做了判断 如果没有前一页 则不可点击前跳 class="disabled" --%>
+                                        <li <c:if test="${!page.hasPreviouse}">class="am-disabled"</c:if> >
+                                            <a href="?start=${page.start-1}">
+                                                <span> < </span>
+                                            </a>
+                                        </li>
+                                        <%--中间的分页  显示各页号--%>
+                                        <%-- begin:开始的元素 end:最后一个元素 varStatus:代表循环状态的变量名称 --%>
+                                        <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
+                                            <c:if test="${status.count-page.start<=page.end  && status.index>=page.index}">
+                                                <%--
+                                                status.index==page.start 判断是否是目前的这一页 --%>
+                                                <li <c:if test="${status.index==page.start}">class="am-active am-disabled"</c:if>>
+                                                    <a href="?start=${status.index}"
+                                                       <c:if test="${status.index==page.start}">class="current"</c:if>
+                                                    >${status.count}</a>
+                                                </li>
+                                            </c:if>
+                                        </c:forEach>
+                                        <%--跳到下一页 同样做了判断 如果没有下一页 则不可点击后跳 class="disabled" --%>
+                                        <li <c:if test="${!page.hasNext}">class="am-disabled"</c:if>>
+                                            <a href="?start=${page.start+1}">
+                                                <span> > </span>
+                                            </a>
+                                        </li>
+                                        <%--跳到尾页 如果没有后一页 那么 跳到尾页的这个标签是不可点击的 class="disabled" --%>
+                                        <li <c:if test="${!page.hasNext}">class="am-disabled"</c:if>>
+                                            <a href="?start=${page.totalPage-1}">
+                                                <span> >> </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
+<%--                            <div class="am-u-lg-12 am-cf">--%>
+<%--                                <itheima:page url="${pageContext.request.contextPath }/menu/list" />--%>
+<%--                            </div>--%>
+
+                            <!-- 分页标签 -->
+                           <%-- <nav class="pageDIV">
+                                <ul class="pagination">
+                                    &lt;%&ndash;跳到首页 这里做了判断 如果没有前一页 那么 跳到首页的这个标签是不可点击的 class="disabled" &ndash;%&gt;
+                                    <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if> >
+                                        <a href="?start=0">   &lt;%&ndash; 首页的开始数据的索引为0 点击后会发现地址栏变为 http://localhost:8080/DemoMVC/getlist?page.start=0  是作为参数显式传递的 &ndash;%&gt;
+                                            <span> << </span>
+                                        </a>
+                                    </li>
+                                    &lt;%&ndash;跳到前一页 同样做了判断 如果没有前一页 则不可点击前跳 class="disabled" &ndash;%&gt;
+                                    <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if> >
+                                        <a href="?start=${page.start-1}"> &lt;%&ndash;当前页面数据索引 - 每页显示条数 = 上一页的第一条数据索引 &ndash;%&gt;
+                                            <span> < </span>
+                                        </a>
+                                    </li>
+                                    &lt;%&ndash;中间的分页  显示各页号&ndash;%&gt;
+                                    &lt;%&ndash; begin:开始的元素 end:最后一个元素 varStatus:代表循环状态的变量名称 &ndash;%&gt;
+                                    &lt;%&ndash; 比如我一共39条元素 共4页 第一页记为0 最后一页 4-1 =3  &ndash;%&gt;
+                                    <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
+                                        <c:if test="${status.count-page.start<=5 && status.index>=page.index}">
+                                            &lt;%&ndash; status.index==page.start 判断是否是目前的这一页
+                                                 举例：status.index = 2  page.count = 10
+                                                       第一页 0  第二页 10  第三页 20   （数字指每页第一行的索引）
+                                                       如果现在在第三页 那么 2 * 10 = 20  条件成立
+                                                       class="disabled"  此页数的标签不可点击
+                                                       class="current"   此页数的标签颜色显示为灰色表示目前位置停留在此页 &ndash;%&gt;
+                                            <li <c:if test="${status.index==page.start}">class="disabled"</c:if>>
+                                                <a href="?start=${status.index}"
+                                                   <c:if test="${status.index==page.start}">class="current"</c:if>
+                                                >${status.count}</a>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+                                    &lt;%&ndash;跳到下一页 同样做了判断 如果没有下一页 则不可点击后跳 class="disabled" &ndash;%&gt;
+                                    <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
+                                        <a href="?start=${page.start+1}">
+                                            <span> > </span>
+                                        </a>
+                                    </li>
+                                    &lt;%&ndash;跳到尾页 如果没有后一页 那么 跳到尾页的这个标签是不可点击的 class="disabled" &ndash;%&gt;
+                                    <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
+                                        <a href="?start=${page.totalPage-1}">
+                                            <span> >> </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+--%>
                         </div>
                     </div>
                 </div>
@@ -347,7 +437,7 @@
 </div>
 
 <script src="http://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
-<script src="js/app.js"></script>
+<script src="<%=basePath%>js/app.js"></script>
 
 </body>
 

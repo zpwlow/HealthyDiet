@@ -1,52 +1,59 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" class="login-content" data-ng-app="materialAdmin">
 
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName()
+			+ ":" + request.getServerPort() + path + "/";
+%>
+<%-- <%=basePath%> --%>
+
 
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="Generator" content="EditPlus®">
-	<meta name="Author" content="">
-	<meta name="Keywords" content="">
-	<meta name="Description" content="">
+<%--	<meta http-equiv="X-UA-Compatible" content="IE=edge">--%>
+<%--	<meta name="Generator" content="EditPlus®">--%>
+<%--	<meta name="Author" content="">--%>
+<%--	<meta name="Keywords" content="">--%>
+<%--	<meta name="Description" content="">--%>
 	<title>登录页面</title>
 
-	<base href="http://localhost:8080/demo/">
+<%--	<base href="http://localhost:8080/demo/">--%>
 
 	<!-- Vendor CSS -->
-	<link href="css/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css">
+	<link href="<%=basePath%>css/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css">
 	<!-- CSS -->
-	<link href="css/app.min.1.css" rel="stylesheet" type="text/css">
-
+	<link href="<%=basePath%>css/app.min.1.css" rel="stylesheet" type="text/css">
+	<link rel="icon" type="image/png" href="<%=basePath%>i/logo.png">
 	<script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
 	<!-- Angular -->
-	<script src="js/bower_components/angular/angular.min.js"></script>
-	<script src="js/bower_components/angular-resource/angular-resource.min.js"></script>
-	<script src="js/bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular/angular.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular-animate/angular-animate.min.js"></script>
 
 
 	<!-- Angular Modules -->
-	<script src="js/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="js/bower_components/angular-loading-bar/src/loading-bar.js"></script>
-	<script src="js/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
-	<script src="js/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+	<script src="<%=basePath%>js/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
 	<!-- Common js -->
-	<script src="js/bower_components/angular-nouislider/src/nouislider.min.js"></script>
-	<script src="js/bower_components/ng-table/dist/ng-table.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/angular-nouislider/src/nouislider.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/ng-table/dist/ng-table.min.js"></script>
 
 	<!-- Placeholder for IE9 -->
 	<!--[if IE 9 ]>
-	<script src="js/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+	<script src="<%=basePath%>js/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
 	<![endif]-->
 	<!-- App level -->
-	<script src="js/app.js"></script>
-	<script src="js/controllers/main.js"></script>
-	<script src="js/controllers/ui-bootstrap.js"></script>
+	<script src="<%=basePath%>js/app.js"></script>
+	<script src="<%=basePath%>js/controllers/main.js"></script>
+	<script src="<%=basePath%>js/controllers/ui-bootstrap.js"></script>
 
 
 	<!-- Template Modules -->
-	<script src="js/modules/form.js"></script>
+	<script src="<%=basePath%>js/modules/form.js"></script>
 
 	<script>
 		// 判断是登录账号和密码是否为空

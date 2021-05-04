@@ -36,8 +36,8 @@ public class NavigationTag extends TagSupport {
 		url = resolveUrl(url, pageContext);
 		try {
 			// 计算总页数
-			int pageCount = page.getTotal() / page.getSize();
-			if (page.getTotal() % page.getSize() > 0) {
+			int pageCount = page.getTotal() / page.getCount();
+			if (page.getTotal() % page.getCount() > 0) {
 				pageCount++;
 			}
 			writer.print("<nav><ul class=\"pagination\">");
@@ -46,9 +46,9 @@ public class NavigationTag extends TagSupport {
 			//末页链接路径
 			String backUrl = append(url, "page", pageCount);
 			// 显示“上一页”按钮
-			if (page.getPage() > 1) {
-				String preUrl = append(url, "page", page.getPage() - 1);
-				preUrl = append(preUrl, "rows", page.getSize());
+			if (page.getStart() > 1) {
+				String preUrl = append(url, "page", page.getStart() - 1);
+				preUrl = append(preUrl, "rows", page.getCount());
 		writer.print("<li><a href=\"" + homeUrl + "\">" + "首页</a></li>");
 		writer.print("<li><a href=\"" + preUrl + "\">" + "上一页</a></li>");
 			} else {
@@ -59,27 +59,27 @@ writer.print("<li class=\"disabled\"><a href=\"#\">" + "上一页 </a></li>");
 			// 若1 则 1 2 3 4 5, 若2 则 1 2 3 4 5, 若3 则1 2 3 4 5,
 			// 若4 则 2 3 4 5 6 ,若10 则 8 9 10 11 12
 			int indexPage =1;
-			if(page.getPage() - 2 <=0){
+			if(page.getStart() - 2 <=0){
 				indexPage=1;
-			}else if(pageCount-page.getPage() <=2){
+			}else if(pageCount-page.getStart() <=2){
 				indexPage=pageCount-4;
 			}else{
-				indexPage= page.getPage() - 2;
+				indexPage= page.getStart() - 2;
 			}
     for (int i= 1;i <= number && indexPage <= pageCount;indexPage++,i++){
-				if (indexPage == page.getPage()) {
+				if (indexPage == page.getStart()) {
 			writer.print("<li class=\"active\"><a href=\"#\">" + indexPage
 				+"<spanclass=\"sr-only\"></span></a></li>");
 					continue;
 				}
 				String pageUrl = append(url, "page", indexPage);
-				pageUrl = append(pageUrl, "rows", page.getSize());
+				pageUrl = append(pageUrl, "rows", page.getCount());
 writer.print("<li><a href=\"" + pageUrl + "\">" + indexPage + "</a></li>");
 			}
 			// 显示“下一页”按钮
-			if (page.getPage() < pageCount) {
-				String nextUrl = append(url, "page", page.getPage() + 1);
-				nextUrl = append(nextUrl, "rows", page.getSize());
+			if (page.getStart() < pageCount) {
+				String nextUrl = append(url, "page", page.getStart() + 1);
+				nextUrl = append(nextUrl, "rows", page.getCount());
 		writer.print("<li><a href=\"" + nextUrl + "\">" + "下一页</a></li>");
 		writer.print("<li><a href=\"" + backUrl + "\">" + "尾页</a></li>");
 			} else {
