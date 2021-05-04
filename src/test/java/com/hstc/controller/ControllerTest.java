@@ -68,4 +68,11 @@ public class ControllerTest {
         int i = userService.addUser(user);
         System.out.println("保存的用户数据为："+1);
     }
+
+    @Test
+    public void updateUserTest(){
+        User user = new User();
+        int i = userService.updateUser(user);
+        System.out.println("增加用户数为："+i);
+    }
 }
