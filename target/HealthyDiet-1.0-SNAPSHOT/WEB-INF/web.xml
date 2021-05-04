@@ -31,10 +31,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>crm</servlet-name>
-    <url-pattern>*.action</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>crm</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
@@ -49,10 +45,6 @@
       <param-value>utf-8</param-value>
     </init-param>
   </filter>
-  <filter-mapping>
-    <filter-name>encodingFilter</filter-name>
-    <url-pattern>*.action</url-pattern>
-  </filter-mapping>
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>

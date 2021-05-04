@@ -28,6 +28,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (url.contains("/user/addUser")) {
 			return true;
 		}
+		if (url.contains("/user/queryUserById")) {
+			return true;
+		}
 		// 获取Session
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("USER_SESSION");
