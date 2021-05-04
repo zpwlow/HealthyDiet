@@ -22,7 +22,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (url.contains("/login")) {
 			return true;
 		}
-		if (url.contains("/queryByMname")) {
+		if (url.contains("/user/queryByMname")) {
+			return true;
+		}
+		if (url.contains("/user/addUser")) {
 			return true;
 		}
 		// 获取Session

@@ -1,5 +1,7 @@
 package com.hstc.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hstc.pojo.Menu;
 import com.hstc.pojo.User;
 import com.hstc.service.MenuService;
@@ -68,6 +70,9 @@ public class ControllerTest {
         User user = new User(1,"男",20,
                 163.1,64.2,"甜",
                 "冠心病","冠心病");
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(user);
+        System.out.println("Json："+json);
         int i = userService.addUser(user);
         System.out.println("保存的用户数据为："+1);
     }

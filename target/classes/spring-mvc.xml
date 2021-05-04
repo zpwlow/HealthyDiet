@@ -26,6 +26,18 @@
     <!-- 4.扫描web controller相关的bean -->
     <context:component-scan base-package="com.hstc.controller" />
 
+    <!--自定义消息转换器的编码,解决后台传输json回前台时，中文乱码问题 -->
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8" />
+    </bean>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="stringHttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
     <!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
 <!--    <mvc:resources location="/js/" mapping="/js/**" />-->
 <!--    <mvc:resources location="/css/" mapping="/css/**" />-->
@@ -50,16 +62,15 @@
     <!-- 配置拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/WEB-INF/jsp/**" />
+            <mvc:mapping path="/**" />
             <!--
             mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截，这样就不用在
             LoginInterceptor的preHandler方法里面获取不拦截的请求uri地址了(优选)   -->
-            <mvc:exclude-mapping path="/" />
-<!--            <mvc:exclude-mapping path="/js/" />-->
-<!--            <mvc:exclude-mapping path="/css/" />-->
-<!--            <mvc:exclude-mapping path="/fons/" />-->
-<!--            <mvc:exclude-mapping path="/img/" />-->
-<!--            <mvc:exclude-mapping path="/i/" />-->
+            <mvc:exclude-mapping path="/js/" />
+            <mvc:exclude-mapping path="/css/" />
+            <mvc:exclude-mapping path="/fons/" />
+            <mvc:exclude-mapping path="/img/" />
+            <mvc:exclude-mapping path="/i/" />
             <bean class="com.hstc.interceptor.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
