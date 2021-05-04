@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,7 @@ public class MenuController {
                                HttpServletRequest request,
                                Model model) {
         try{
-            page = Integer.parseInt(request.getParameter("start"));  //从前台获取 开始数据的索引
+            page = Integer.parseInt(request.getParameter("start"))-1;  //从前台获取 开始数据的索引
             rows = Integer.parseInt(request.getParameter("page.count"));  //从前台获取 每页显示的条目数
         }catch (Exception e){
         }

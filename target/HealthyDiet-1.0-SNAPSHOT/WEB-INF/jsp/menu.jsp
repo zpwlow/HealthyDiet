@@ -303,7 +303,7 @@
                                         <c:forEach items="${page.rows}" var="row">
                                             <tr class="gradeX">
                                                 <td>
-                                                    <img src="${row.menu_url}" class="tpl-table-line-img" alt="">
+                                                    <img src="${row.menu_url}" class="tpl-table-line-img" height="90" width="90" alt="">
                                                 </td>
                                                 <td class="am-text-middle">${row.menu_name}</td>
                                                 <td class="am-text-middle">${row.flavor}</td>
@@ -334,17 +334,15 @@
 
                                 <div class="am-fr">
                                     <ul class="am-pagination tpl-pagination">
-<%--                                        <li class="am-disabled"><a href="#">«</a></li>--%>
-<%--                                        <li class="am-active"><a href="#">1</a></li>--%>
                                         <%--跳到首页 这里做了判断 如果没有前一页 那么 跳到首页的这个标签是不可点击的 class="disabled" --%>
                                         <li <c:if test="${!page.hasPreviouse}">class="am-disabled"</c:if> >
-                                            <a href="?start=0">
+                                            <a href="?start=1">
                                                 <span> << </span>
                                             </a>
                                         </li>
                                         <%--跳到前一页 同样做了判断 如果没有前一页 则不可点击前跳 class="disabled" --%>
                                         <li <c:if test="${!page.hasPreviouse}">class="am-disabled"</c:if> >
-                                            <a href="?start=${page.start-1}">
+                                            <a href="?start=${page.start}">
                                                 <span> < </span>
                                             </a>
                                         </li>
@@ -352,10 +350,10 @@
                                         <%-- begin:开始的元素 end:最后一个元素 varStatus:代表循环状态的变量名称 --%>
                                         <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
                                             <c:if test="${status.count-page.start<=page.end  && status.index>=page.index}">
-                                                <%--status.count-page.start<=5
+                                                <%--
                                                 status.index==page.start 判断是否是目前的这一页 --%>
                                                 <li <c:if test="${status.index==page.start}">class="am-active am-disabled"</c:if>>
-                                                    <a href="?start=${status.index}"
+                                                    <a href="?start=${status.index+1}"
                                                        <c:if test="${status.index==page.start}">class="current"</c:if>
                                                     >${status.count}</a>
                                                 </li>
@@ -363,71 +361,20 @@
                                         </c:forEach>
                                         <%--跳到下一页 同样做了判断 如果没有下一页 则不可点击后跳 class="disabled" --%>
                                         <li <c:if test="${!page.hasNext}">class="am-disabled"</c:if>>
-                                            <a href="?start=${page.start+1}">
+                                            <a href="?start=${page.start+1+1}">
                                                 <span> > </span>
                                             </a>
                                         </li>
                                         <%--跳到尾页 如果没有后一页 那么 跳到尾页的这个标签是不可点击的 class="disabled" --%>
                                         <li <c:if test="${!page.hasNext}">class="am-disabled"</c:if>>
-                                            <a href="?start=${page.totalPage-1}">
+                                            <a href="?start=${page.totalPage}">
                                                 <span> >> </span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-<%--                            <div class="am-u-lg-12 am-cf">--%>
-<%--                                <itheima:page url="${pageContext.request.contextPath }/menu/list" />--%>
-<%--                            </div>--%>
 
-                            <!-- 分页标签 -->
-                           <%-- <nav class="pageDIV">
-                                <ul class="pagination">
-                                    &lt;%&ndash;跳到首页 这里做了判断 如果没有前一页 那么 跳到首页的这个标签是不可点击的 class="disabled" &ndash;%&gt;
-                                    <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if> >
-                                        <a href="?start=0">   &lt;%&ndash; 首页的开始数据的索引为0 点击后会发现地址栏变为 http://localhost:8080/DemoMVC/getlist?page.start=0  是作为参数显式传递的 &ndash;%&gt;
-                                            <span> << </span>
-                                        </a>
-                                    </li>
-                                    &lt;%&ndash;跳到前一页 同样做了判断 如果没有前一页 则不可点击前跳 class="disabled" &ndash;%&gt;
-                                    <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if> >
-                                        <a href="?start=${page.start-1}"> &lt;%&ndash;当前页面数据索引 - 每页显示条数 = 上一页的第一条数据索引 &ndash;%&gt;
-                                            <span> < </span>
-                                        </a>
-                                    </li>
-                                    &lt;%&ndash;中间的分页  显示各页号&ndash;%&gt;
-                                    &lt;%&ndash; begin:开始的元素 end:最后一个元素 varStatus:代表循环状态的变量名称 &ndash;%&gt;
-                                    &lt;%&ndash; 比如我一共39条元素 共4页 第一页记为0 最后一页 4-1 =3  &ndash;%&gt;
-                                    <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
-                                        <c:if test="${status.count-page.start<=5 && status.index>=page.index}">
-                                            &lt;%&ndash; status.index==page.start 判断是否是目前的这一页
-                                                 举例：status.index = 2  page.count = 10
-                                                       第一页 0  第二页 10  第三页 20   （数字指每页第一行的索引）
-                                                       如果现在在第三页 那么 2 * 10 = 20  条件成立
-                                                       class="disabled"  此页数的标签不可点击
-                                                       class="current"   此页数的标签颜色显示为灰色表示目前位置停留在此页 &ndash;%&gt;
-                                            <li <c:if test="${status.index==page.start}">class="disabled"</c:if>>
-                                                <a href="?start=${status.index}"
-                                                   <c:if test="${status.index==page.start}">class="current"</c:if>
-                                                >${status.count}</a>
-                                            </li>
-                                        </c:if>
-                                    </c:forEach>
-                                    &lt;%&ndash;跳到下一页 同样做了判断 如果没有下一页 则不可点击后跳 class="disabled" &ndash;%&gt;
-                                    <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-                                        <a href="?start=${page.start+1}">
-                                            <span> > </span>
-                                        </a>
-                                    </li>
-                                    &lt;%&ndash;跳到尾页 如果没有后一页 那么 跳到尾页的这个标签是不可点击的 class="disabled" &ndash;%&gt;
-                                    <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-                                        <a href="?start=${page.totalPage-1}">
-                                            <span> >> </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
---%>
                         </div>
                     </div>
                 </div>

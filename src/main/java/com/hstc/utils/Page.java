@@ -12,6 +12,7 @@ public class Page<T> {
 	private int total;    // 总条数
 	private int start;     // 当前页
 	private int count;     // 每页数
+	private int totalPage;
 	private List<T> rows; // 结果集
 
 	public boolean isHasPreviouse(){
@@ -20,13 +21,12 @@ public class Page<T> {
 		return true;
 	}
 	public boolean isHasNext(){
-		if(start==getLast())
+		if(start==totalPage-1)
 			return false;
 		return true;
 	}
 
 	public int getTotalPage(){
-		int totalPage;
 		// 假设总数是50，是能够被5整除的，那么就有10页
 		if (0 == total % count)
 			totalPage = total /count;
