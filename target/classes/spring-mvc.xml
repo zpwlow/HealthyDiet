@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+    <!-- 配置SpringMVC -->
+    <!-- 1.开启SpringMVC注解驱动 -->
+    <mvc:annotation-driven />
+    <!-- 2.静态资源默认servlet配置-->
+    <mvc:default-servlet-handler/>
+
+
+    <!-- 4.扫描web controller相关的bean -->
+    <context:component-scan base-package="com.hstc.controller" />
+
+    <!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
+<!--    <mvc:resources location="/js/" mapping="/js/**" />-->
+<!--    <mvc:resources location="/css/" mapping="/css/**" />-->
+<!--    <mvc:resources location="/fonts/" mapping="/fonts/**" />-->
+<!--    <mvc:resources location="/img/" mapping="/img/**" />-->
+<!--    <mvc:resources location="/i/" mapping="/i/**" />-->
+
+    <!-- 3.配置jsp 显示ViewResolver视图解析器 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--
+        <mvc:mapping path="/**"/>这里如果拦截所有资源的话，会把css等静态资源都拦截到，
+        建议只拦截响应的html或者jsp页面。
+        <mvc:exclude-mapping path="/" />这里是配置不需要拦截的地址。
+        由于我的登录页是根目录，所以根目录不拦截。
+    -->
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/WEB-INF/jsp/**" />
+            <!--
+            mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截，这样就不用在
+            LoginInterceptor的preHandler方法里面获取不拦截的请求uri地址了(优选)   -->
+            <mvc:exclude-mapping path="/" />
+<!--            <mvc:exclude-mapping path="/js/" />-->
+<!--            <mvc:exclude-mapping path="/css/" />-->
+<!--            <mvc:exclude-mapping path="/fons/" />-->
+<!--            <mvc:exclude-mapping path="/img/" />-->
+<!--            <mvc:exclude-mapping path="/i/" />-->
+            <bean class="com.hstc.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>
