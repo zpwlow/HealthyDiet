@@ -42,4 +42,11 @@ public class ControllerTest {
         int i = menuService.deleteMenuById(1);
         System.out.println("删除的数据数据量为："+i);
     }
+
+    @Test
+    public void insertMenuTest(){
+        Menu menu = new Menu();
+        int i = menuService.addMenu(menu);
+        System.out.println("添加数据的数据量为："+ i);
+    }
 }

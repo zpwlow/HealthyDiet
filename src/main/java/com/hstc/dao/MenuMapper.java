@@ -18,9 +18,9 @@ public interface MenuMapper {
     //根据id删除一个Menu
     int deleteMenuById(@Param("menuId") int id);
 
-//    //增加一个菜单
-//   int addMenu(Menu menu);
-//
+    //增加一个菜谱
+   int addMenu(Menu menu);
+
 
 //
 //    //更新Menu

@@ -48,11 +48,11 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.deleteMenuById(id);
     }
 
-//    @Override
-//    public int addMenu(Menu menu) {
-//        return 0;
-//    }
-//
+    @Override
+    public int addMenu(Menu menu) {
+        return menuMapper.addMenu(menu);
+    }
+
 
 //
 //    @Override

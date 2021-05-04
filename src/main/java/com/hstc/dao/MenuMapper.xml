@@ -39,7 +39,6 @@
                     select="com.hstc.dao.MenuMakeMapper.getMenuMakeListByMid"
                     fetchType="lazy"/>
 
-
     </resultMap>
 
     <select id="queryMenuByName"  resultMap="menuMap">
@@ -61,6 +60,12 @@
     <delete id="deleteMenuById" parameterType="int">
         delete from menu where menu_id=#{menuId}
     </delete>
+
+    <insert id="addMenu" parameterType="menuMap">
+        insert into menu values (null ,#{menu_id},#{menu_name}
+        ,#{flavor},#{calorie},#{technology}
+        ,#{make_time},#{diseases},#{manu_url})
+    </insert>
 
     <!-- 查询菜谱总数 -->
     <select id="selectMenuListCount" resultType="Integer">
