@@ -14,13 +14,15 @@ public interface MenuService {
     //根据id查询，返回一个Menu
     List<Menu> queryMenuByName(String menuName);
 
+    //根据id删除一个Menu
+    int deleteMenuById(int id);
+
 
 
     //    //增加一个菜单
 //    int addMenu(Menu menu);
 //
-//    //根据id删除一个Menu
-//    int deleteMenu(int id);
+
 //
 //    //更新Menu
 //    int updateMenu(Menu menu);

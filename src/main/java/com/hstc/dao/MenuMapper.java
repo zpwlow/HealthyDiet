@@ -15,11 +15,13 @@ public interface MenuMapper {
     // 菜谱数
     Integer selectMenuListCount();
 
+    //根据id删除一个Menu
+    int deleteMenuById(@Param("menuId") int id);
+
 //    //增加一个菜单
 //   int addMenu(Menu menu);
 //
-//   //根据id删除一个Menu
-//    int deleteMenu(@Param("menuId") int id);
+
 //
 //    //更新Menu
 //    int updateMenu(Menu menu);

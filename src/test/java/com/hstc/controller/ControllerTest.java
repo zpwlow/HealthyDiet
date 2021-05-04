@@ -36,4 +36,10 @@ public class ControllerTest {
         Page<Menu> menuPage = menuService.queryAllMenu(page, rows);
         System.out.println(menuPage);
     }
+
+    @Test
+    public void deleteMenuByidTest(){
+        int i = menuService.deleteMenuById(1);
+        System.out.println("删除的数据数据量为："+i);
+    }
 }

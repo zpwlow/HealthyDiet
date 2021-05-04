@@ -57,7 +57,12 @@
         </if>
     </select>
 
-    <!-- 查询客户总数 -->
+    <!-- 根据删除菜谱 -->
+    <delete id="deleteMenuById" parameterType="int">
+        delete from menu where menu_id=#{menuId}
+    </delete>
+
+    <!-- 查询菜谱总数 -->
     <select id="selectMenuListCount" resultType="Integer">
         select count(*) from menu
     </select>

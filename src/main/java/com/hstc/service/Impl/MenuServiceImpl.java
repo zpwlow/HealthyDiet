@@ -40,19 +40,20 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> queryMenuByName(String menuName) {
-        return this.menuMapper.queryMenuByName(menuName);
+        return menuMapper.queryMenuByName(menuName);
     }
 
+    @Override
+    public int deleteMenuById(int id) {
+        return menuMapper.deleteMenuById(id);
+    }
 
 //    @Override
 //    public int addMenu(Menu menu) {
 //        return 0;
 //    }
 //
-//    @Override
-//    public int deleteMenu(int id) {
-//        return 0;
-//    }
+
 //
 //    @Override
 //    public int updateMenu(Menu menu) {
@@ -60,8 +61,5 @@ public class MenuServiceImpl implements MenuService {
 //    }
 //
 
-//    @Override
-//    public Menu queryMenuByName(String menu_name) {
-//        return null;
-//    }
+
 }
