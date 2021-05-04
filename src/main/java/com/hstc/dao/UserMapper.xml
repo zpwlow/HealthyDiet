@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hstc.dao.UserMapper">
+    <insert id="addUser" parameterType="com.hstc.pojo.User">
+        insert into user
+        values (#{user_id},#{sex},#{age},
+                #{height},#{weight},#{flavor},
+                #{convalescent},#{medical_history})
+    </insert>
+
+</mapper>

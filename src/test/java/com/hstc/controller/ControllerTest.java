@@ -1,7 +1,9 @@
 package com.hstc.controller;
 
 import com.hstc.pojo.Menu;
+import com.hstc.pojo.User;
 import com.hstc.service.MenuService;
+import com.hstc.service.UserService;
 import com.hstc.utils.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +22,9 @@ public class ControllerTest {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     public void selectMenuByIdTest(){
@@ -55,5 +60,12 @@ public class ControllerTest {
         Menu menu = new Menu();
         int i = menuService.updateMenu(menu);
         System.out.println("修改的数据量为："+i);
+    }
+
+    @Test
+    public void addUserTest(){
+        User user = new User();
+        int i = userService.addUser(user);
+        System.out.println("保存的用户数据为："+1);
     }
 }
