@@ -53,13 +53,11 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.addMenu(menu);
     }
 
+    @Override
+    public int updateMenu(Menu menu) {
+        return menuMapper.updateMenu(menu);
+    }
 
-//
-//    @Override
-//    public int updateMenu(Menu menu) {
-//        return 0;
-//    }
-//
 
 
 }

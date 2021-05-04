@@ -2,7 +2,6 @@ package com.hstc.dao;
 
 import com.hstc.pojo.Menu;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,14 +20,8 @@ public interface MenuMapper {
     //增加一个菜谱
    int addMenu(Menu menu);
 
+    //更新Menu
+    int updateMenu(Menu menu);
 
-//
-//    //更新Menu
-//    int updateMenu(Menu menu);
-//
-//
 
-//
-//    //根据菜谱名查询
-//    Menu queryMenuByName(@Param("menuName") String menu_name);
 }

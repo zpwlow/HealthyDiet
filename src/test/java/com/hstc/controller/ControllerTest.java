@@ -49,4 +49,11 @@ public class ControllerTest {
         int i = menuService.addMenu(menu);
         System.out.println("添加数据的数据量为："+ i);
     }
+
+    @Test
+    public void updateMenuTest(){
+        Menu menu = new Menu();
+        int i = menuService.updateMenu(menu);
+        System.out.println("修改的数据量为："+i);
+    }
 }
