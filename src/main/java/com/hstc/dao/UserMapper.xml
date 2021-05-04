@@ -11,11 +11,12 @@
     </insert>
     
     <update id="updateUser" parameterType="com.hstc.pojo.User">
-        update user set sex=#{sex},age=#{age},
-                        height=#{height},weight=#{weight},flavor=#{flavor},
-                        convalescent=#{convalescent},
-                        medical_history#{medical_history}
-        where user_id=#{user_id}
+        update user
+        set sex = #{sex},age = #{age},
+            height = #{height},weight = #{weight},flavor = #{flavor},
+            convalescent = #{convalescent},
+            medical_history = #{medical_history}
+        where user_id = #{user_id}
     </update>
 
     <select id="selectUserById" resultType="com.hstc.pojo.User">
@@ -26,5 +27,9 @@
     <select id="selectAllUser" resultType="com.hstc.pojo.User">
         select * from user
     </select>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where user_id = #{userId}
+    </delete>
 
 </mapper>

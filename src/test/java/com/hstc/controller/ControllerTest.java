@@ -65,14 +65,18 @@ public class ControllerTest {
 
     @Test
     public void addUserTest(){
-        User user = new User();
+        User user = new User(1,"男",20,
+                163.1,64.2,"甜",
+                "冠心病","冠心病");
         int i = userService.addUser(user);
         System.out.println("保存的用户数据为："+1);
     }
 
     @Test
     public void updateUserTest(){
-        User user = new User();
+        User user = new User(1,"男",21,
+                163.1,64.2,"辣",
+                "冠心病","冠心病");
         int i = userService.updateUser(user);
         System.out.println("增加用户数为："+i);
     }
@@ -87,5 +91,11 @@ public class ControllerTest {
     public void selectAllUserTest(){
         List<User> users = userService.selectAllUser();
         System.out.println(users);
+    }
+
+    @Test
+    public void deleteUserByIdTest(){
+        int i = userService.deleteUser(1);
+        System.out.println("删除的用户数为："+i);
     }
 }

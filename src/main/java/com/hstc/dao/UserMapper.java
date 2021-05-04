@@ -19,4 +19,7 @@ public interface UserMapper {
     //管理员查询所有用户
     List<User> selectAllUser();
 
+    //管理员删除用户
+    int deleteUser(@Param("userId") int id);
+
 }
