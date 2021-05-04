@@ -18,4 +18,13 @@
         where user_id=#{user_id}
     </update>
 
+    <select id="selectUserById" resultType="com.hstc.pojo.User">
+        select * from user
+        where user_id=#{userId}
+    </select>
+
+    <select id="selectAllUser" resultType="com.hstc.pojo.User">
+        select * from user
+    </select>
+
 </mapper>

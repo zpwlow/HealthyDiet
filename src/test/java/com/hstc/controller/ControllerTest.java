@@ -8,6 +8,7 @@ import com.hstc.utils.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -74,5 +75,17 @@ public class ControllerTest {
         User user = new User();
         int i = userService.updateUser(user);
         System.out.println("增加用户数为："+i);
+    }
+
+    @Test
+    public void selectUserTest(){
+        User user = userService.selectUserById(1);
+        System.out.println("user: " +user);
+    }
+
+    @Test
+    public void selectAllUserTest(){
+        List<User> users = userService.selectAllUser();
+        System.out.println(users);
     }
 }

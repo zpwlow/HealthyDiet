@@ -61,13 +61,13 @@
         delete from menu where menu_id=#{menuId}
     </delete>
 
-    <insert id="addMenu" parameterType="menuMap">
+    <insert id="addMenu" parameterType="com.hstc.pojo.Menu">
         insert into menu values (null ,#{menu_id},#{menu_name}
         ,#{flavor},#{calorie},#{technology}
         ,#{make_time},#{diseases},#{manu_url})
     </insert>
 
-    <update id="updateMenu" parameterType="menuMap">
+    <update id="updateMenu" parameterType="com.hstc.pojo.Menu">
         update menu set menu_name=#{menu_name}
                       ,flavor=#{flavor},calorie=#{calorie}
                       ,technology=#{technology},make_time=#{make_time}
