@@ -8,6 +8,15 @@
         from daily_energy,user
         where daily_energy.user_id = user.user_id
             and daily_energy.user_id = #{userId}
+        <!-- 执行分页查询 -->
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <!-- 查询菜谱总数 -->
+    <select id="selectDailyEnergyCount" resultType="Integer">
+        select count(*) from daily_energy where user_id = #{userId}
     </select>
 
     <insert id="addDailyEnergy" parameterType="com.hstc.pojo.DailyEnergy">
@@ -18,8 +27,8 @@
     <update id="updateDailyEnergy" parameterType="com.hstc.pojo.DailyEnergy">
         update daily_energy
         set needed=#{needed},consume=#{consume},
-            intake=#{intake},steps=#{steps},time=#{time}
-        where user_id=#{user_id}
+            intake=#{intake},steps=#{steps}
+        where user_id=#{user_id} and time=#{time}
     </update>
 
 

@@ -145,8 +145,8 @@ public class ControllerTest {
     * */
     @Test
     public void queryDailyEnergyByIdTest(){
-        List<DailyEnergy> dailyEnergies =
-                dailyEnergyService.queryDailyEnergyById(1);
+        Page<DailyEnergy> dailyEnergies =
+                dailyEnergyService.queryDailyEnergyById(1,0,10);
         System.out.println(dailyEnergies);
     }
 

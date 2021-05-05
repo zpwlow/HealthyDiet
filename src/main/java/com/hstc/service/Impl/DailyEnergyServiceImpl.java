@@ -3,6 +3,7 @@ package com.hstc.service.Impl;
 import com.hstc.dao.DailyEnergyMapper;
 import com.hstc.pojo.DailyEnergy;
 import com.hstc.service.DailyEnergyService;
+import com.hstc.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +21,16 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     * 根据用户id查询用户的每日能量信息
     * */
     @Override
-    public List<DailyEnergy> queryDailyEnergyById(int userId) {
-        return dailyEnergyMapper.queryDailyEnergyById(userId);
+    public Page<DailyEnergy> queryDailyEnergyById(int userId,int start, int count) {
+        List<DailyEnergy> dailyEnergyList =
+                dailyEnergyMapper.queryDailyEnergyById(userId, start, count);
+        Integer total = dailyEnergyMapper.selectDailyEnergyCount(userId);
+        Page<DailyEnergy> result = new Page<>();
+        result.setStart(start);
+        result.setRows(dailyEnergyList);
+        result.setCount(count);
+        result.setTotal(total);
+        return result;
     }
 
     /*

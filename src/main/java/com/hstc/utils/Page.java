@@ -5,9 +5,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Page<T> {
 	private int total;    // 总条数
 	private int start;     // 当前页
