@@ -17,16 +17,13 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;
 
+    /*
+    * 查询所有菜谱做分页
+    * */
     @Override
     public Page<Menu> queryAllMenu(Integer page, Integer rows) {
-        //创建一个Menu
-        Menu menu = new Menu();
-        // 当前页
-        menu.setStart((page) * rows) ;
-        // 每页数
-        menu.setRows(rows);
         // 查询客户列表
-        List<Menu> menuList = menuMapper.queryAllMenu(menu);
+        List<Menu> menuList = menuMapper.queryAllMenu(page,rows);
         // 查询客户列表总记录数
         Integer total = menuMapper.selectMenuListCount();
         // 创建Page返回对象
@@ -38,21 +35,33 @@ public class MenuServiceImpl implements MenuService {
         return result;
     }
 
+    /*
+    * 根据菜谱名查询菜谱
+    * */
     @Override
     public List<Menu> queryMenuByName(String menuName) {
         return menuMapper.queryMenuByName(menuName);
     }
 
+    /*
+    * 根据菜谱id删除菜谱
+    * */
     @Override
     public int deleteMenuById(int id) {
         return menuMapper.deleteMenuById(id);
     }
 
+    /*
+    * 添加菜谱
+    * */
     @Override
     public int addMenu(Menu menu) {
         return menuMapper.addMenu(menu);
     }
 
+    /*
+    * 修改菜谱
+    * */
     @Override
     public int updateMenu(Menu menu) {
         return menuMapper.updateMenu(menu);

@@ -5,14 +5,14 @@
 <mapper namespace="com.hstc.dao.UserMapper">
     <insert id="addUser" parameterType="com.hstc.pojo.User">
         insert into user
-        values (#{user_id},#{sex},#{age},
+        values (#{user_id},#{username},#{sex},#{age},
                 #{height},#{weight},#{flavor},
                 #{convalescent},#{medical_history})
     </insert>
     
     <update id="updateUser" parameterType="com.hstc.pojo.User">
         update user
-        set sex = #{sex},age = #{age},
+        set username = #{username},sex = #{sex},age = #{age},
             height = #{height},weight = #{weight},flavor = #{flavor},
             convalescent = #{convalescent},
             medical_history = #{medical_history}

@@ -10,13 +10,12 @@ import com.hstc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 /*
 * @RestController //有请求时，将返回的数据输出前端
 * */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/userReq")
 public class UserReqController {
 
     @Autowired

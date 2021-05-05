@@ -12,6 +12,8 @@ public class User {
     @Expose
     private int user_id; //用户id
     @Expose
+    private String username;
+    @Expose
     private String sex;  // 用户性别
     @Expose
     private int age;    // 用户年龄

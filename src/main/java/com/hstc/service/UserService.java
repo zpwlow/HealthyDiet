@@ -19,6 +19,6 @@ public interface UserService {
     List<User> selectAllUser();
 
     //管理员删除用户
-    int deleteUser(int id);
+    int deleteUserById(int id);
 
 }

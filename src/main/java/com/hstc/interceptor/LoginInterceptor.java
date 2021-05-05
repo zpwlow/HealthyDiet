@@ -22,15 +22,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (url.contains("/login")) {
 			return true;
 		}
-		if (url.contains("/user/queryByMname")) {
+		if (url.contains("/userReq")) {
 			return true;
 		}
-		if (url.contains("/user/addUser")) {
-			return true;
-		}
-		if (url.contains("/user/queryUserById")) {
-			return true;
-		}
+//		if (url.contains("/userReq/queryByMname")) {
+//			return true;
+//		}
+//		if (url.contains("/userReq/addUser")) {
+//			return true;
+//		}
+//		if (url.contains("/useReq/queryUserById")) {
+//			return true;
+//		}
 		// 获取Session
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("USER_SESSION");

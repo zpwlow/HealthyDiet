@@ -10,7 +10,8 @@ public interface MenuMapper {
     List<Menu> queryMenuByName(@Param("menuName") String menuName);
 
     //查询所有Menu,返回一个List
-    List<Menu> queryAllMenu(Menu menu);
+    List<Menu> queryAllMenu(@Param("start") int start,
+                            @Param("rows") int rows);
     // 菜谱数
     Integer selectMenuListCount();
 

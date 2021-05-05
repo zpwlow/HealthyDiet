@@ -67,7 +67,7 @@ public class ControllerTest {
 
     @Test
     public void addUserTest(){
-        User user = new User(1,"男",20,
+        User user = new User(1,"zhong","男",20,
                 163.1,64.2,"甜",
                 "冠心病","冠心病");
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -79,7 +79,7 @@ public class ControllerTest {
 
     @Test
     public void updateUserTest(){
-        User user = new User(1,"男",21,
+        User user = new User(1,"zhong","男",21,
                 163.1,64.2,"辣",
                 "冠心病","冠心病");
         int i = userService.updateUser(user);
@@ -100,7 +100,7 @@ public class ControllerTest {
 
     @Test
     public void deleteUserByIdTest(){
-        int i = userService.deleteUser(1);
+        int i = userService.deleteUserById(1);
         System.out.println("删除的用户数为："+i);
     }
 }
