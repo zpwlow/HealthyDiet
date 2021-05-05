@@ -35,11 +35,17 @@ public class NutritionRecordServiceImpl implements NutritionRecordService {
     }
 
 
+    /*
+    * 增加用户每日营养素表
+    * */
     @Override
     public int addNutritionRecord(NutritionRecord nutritionRecord) {
         return nutritionRecordMapper.addNutritionRecord(nutritionRecord);
     }
 
+    /*
+    * 修改用户每日营养素表
+    * */
     @Override
     public int updateNutritionRecord(NutritionRecord nutritionRecord) {
         return nutritionRecordMapper.updateNutritionRecord(nutritionRecord);

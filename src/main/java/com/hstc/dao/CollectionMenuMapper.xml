@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hstc.dao.CollectionMenuMapper">
+    <select id="queryCollectionMenuById" parameterType="com.hstc.pojo.CollectionMenu">
+        select username,menu_name,wheter
+        from collection_menu,menu,user
+        where user.user_id=collection_menu.user_id and
+              menu.menu_id=collection_menu.menu_id and
+            collection_menu.user_id=#{userId}
+        <!-- 执行分页查询 -->
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="queryCollectionMenuListCount" parameterType="com.hstc.pojo.CollectionMenu">
+        select count(*) from collection_menu where user_id=#{userId}
+    </select>
+
+    <insert id="addCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
+        insert into collection_menu
+        values (#{user_id},#{menu_id},#{wheter})
+    </insert>
+
+    <update id="updateCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
+        update collection_menu
+        set wheter=#{wheter}
+        where user_id=#{user_id} and menu_id=#{menu_id}
+    </update>
+
+    <select id="queryCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
+        select * from collection_menu
+        where user_id=#{user_id} and menu_id=#{menu_id}
+    </select>
+</mapper>
