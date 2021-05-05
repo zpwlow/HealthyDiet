@@ -159,4 +159,14 @@ public class ControllerTest {
         int i = dailyEnergyService.addDailyEnergy(dailyEnergy);
         System.out.println("增加的数据数量为"+i);
     }
+
+    /*
+    * 修改用户每日能量信息
+    * */
+    @Test
+    public void  updateDailyEnergyTest(){
+        DailyEnergy dailyEnergy = new DailyEnergy();
+        int i = dailyEnergyService.updateDailyEnergy(dailyEnergy);
+        System.out.println("修改的用户信息数量为："+i);
+    }
 }

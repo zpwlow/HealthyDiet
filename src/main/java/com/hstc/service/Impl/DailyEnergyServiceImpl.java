@@ -31,4 +31,12 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     public int addDailyEnergy(DailyEnergy dailyEnergy) {
         return dailyEnergyMapper.addDailyEnergy(dailyEnergy);
     }
+
+    /*
+    * 修改用户每日能量信息
+    * */
+    @Override
+    public int updateDailyEnergy(DailyEnergy dailyEnergy) {
+        return dailyEnergyMapper.updateDailyEnergy(dailyEnergy);
+    }
 }

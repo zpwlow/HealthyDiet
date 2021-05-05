@@ -10,4 +10,7 @@ public interface DailyEnergyService {
 
     //增加用户每日能量信息
     int addDailyEnergy(DailyEnergy dailyEnergy);
+
+    //修改用户每日能量信息
+    int updateDailyEnergy(DailyEnergy dailyEnergy);
 }

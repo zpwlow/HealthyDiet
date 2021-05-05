@@ -15,6 +15,12 @@
         values (#{user_id},#{needed},#{consume},#{intake},#{steps},#{time});
     </insert>
 
+    <update id="updateDailyEnergy" parameterType="com.hstc.pojo.DailyEnergy">
+        update daily_energy
+        set needed=#{needed},consume=#{consume},
+            intake=#{intake},steps=#{steps},time=#{time}
+        where user_id=#{user_id}
+    </update>
 
 
 </mapper>
