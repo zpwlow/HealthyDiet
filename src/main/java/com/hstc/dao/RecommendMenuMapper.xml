@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hstc.dao.RecommendMenuMapper">
+    <insert id="addRecommendMenuMapper" parameterType="com.hstc.pojo.RecommendMenu">
+        insert into recommend_menu
+        values (#{user_id},#{menu_id},#{time},#{wheter})
+    </insert>
+
+    <select id="queryRecommendMenuMapperById" parameterType="com.hstc.pojo.RecommendMenu">
+        select username,menu_name,time,whether
+        from recommend_menu,user,menu
+        where user.user_id=recommend_menu.user_id and
+              menu.menu_id=recommend_menu.menu_id and
+              user.user_id=#{userId}
+        <!-- 执行分页查询 -->
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="queryRecommendMenuMapperListCount"
+            parameterType="com.hstc.pojo.RecommendMenu">
+        select count(*) from recommend_menu where user_id=#{userId}
+    </select>
+
+</mapper>
