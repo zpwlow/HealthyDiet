@@ -13,12 +13,12 @@ public interface UserService {
     int updateUser(User user);
 
     //查询用户
-    User selectUserById(int id);
+    User selectUserById(String  id);
 
     //管理员查询所有用户
     List<User> selectAllUser();
 
     //管理员删除用户
-    int deleteUserById(int id);
+    int deleteUserById(String  id);
 
 }

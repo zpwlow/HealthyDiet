@@ -74,7 +74,7 @@ public class UserReqController {
     * 用户请求: 根据用户ID 查询用户是否存在，存在时返回用户信息，不存在请求失败。
     * */
     @RequestMapping(value = "/queryUserById",method = RequestMethod.GET)
-    public String queryUserById(@RequestParam("userId") int userId){
+    public String queryUserById(@RequestParam("userId") String userId){
         User user = userService.selectUserById(userId);
         Result result;
         if(user == null){

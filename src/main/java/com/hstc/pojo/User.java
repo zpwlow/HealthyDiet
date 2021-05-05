@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
     @Expose
-    private int user_id; //用户id
+    private String user_id; //用户id
     @Expose
     private String username;
     @Expose

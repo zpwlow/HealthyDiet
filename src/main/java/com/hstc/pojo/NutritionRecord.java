@@ -15,7 +15,7 @@ public class NutritionRecord {
     * 用户营养素表
     * */
     @Expose
-    private int user_id; //用户id
+    private String user_id; //用户id
     @Expose
     private String name; //营养素名
     @Expose

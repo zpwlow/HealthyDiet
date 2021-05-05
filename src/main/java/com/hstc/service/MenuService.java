@@ -8,7 +8,7 @@ import java.util.List;
 public interface MenuService {
 
     //查询所有Menu,返回一个List
-    Page<Menu> queryAllMenu(Integer page, Integer rows);
+    Page<Menu> queryAllMenu(Integer page, Integer count);
 
     //根据id查询，返回一个Menu
     List<Menu> queryMenuByName(String menuName);

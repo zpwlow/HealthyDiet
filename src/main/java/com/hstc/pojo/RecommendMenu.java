@@ -15,7 +15,7 @@ public class RecommendMenu {
     * 历史推荐菜谱记录
     * */
     @Expose
-    private int user_id; //用户id
+    private String user_id; //用户id
     @Expose
     private int menu_id; //菜谱id
     @Expose

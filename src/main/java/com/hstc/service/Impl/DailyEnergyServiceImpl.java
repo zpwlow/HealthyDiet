@@ -18,10 +18,10 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     private DailyEnergyMapper dailyEnergyMapper;
 
     /*
-    * 根据用户id查询用户的每日能量信息
+    * 根据用户id查询用户的每日能量信息并进行分页
     * */
     @Override
-    public Page<DailyEnergy> queryDailyEnergyById(int userId,int start, int count) {
+    public Page<DailyEnergy> queryDailyEnergyById(String userId,int start, int count) {
         List<DailyEnergy> dailyEnergyList =
                 dailyEnergyMapper.queryDailyEnergyById(userId, start, count);
         Integer total = dailyEnergyMapper.selectDailyEnergyCount(userId);

@@ -2,6 +2,7 @@ package com.hstc.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hstc.dao.DailyEnergyMapper;
 import com.hstc.pojo.DailyEnergy;
 import com.hstc.pojo.Menu;
 import com.hstc.pojo.User;
@@ -30,6 +31,9 @@ public class ControllerTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DailyEnergyMapper dailyEnergyMapper;
 
     @Autowired
     private DailyEnergyService dailyEnergyService;
@@ -90,7 +94,7 @@ public class ControllerTest {
     * */
     @Test
     public void addUserTest(){
-        User user = new User(1,"zhong","男",20,
+        User user = new User("1","zhong","男",20,
                 163.1,64.2,"甜",
                 "冠心病","冠心病");
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -106,7 +110,7 @@ public class ControllerTest {
     * */
     @Test
     public void updateUserTest(){
-        User user = new User(1,"zhong","男",21,
+        User user = new User("1","zhong","男",21,
                 163.1,64.2,"辣",
                 "冠心病","冠心病");
         int i = userService.updateUser(user);
@@ -118,7 +122,7 @@ public class ControllerTest {
     * */
     @Test
     public void selectUserByIdTest(){
-        User user = userService.selectUserById(1);
+        User user = userService.selectUserById("1");
         System.out.println("user: " +user);
     }
 
@@ -136,7 +140,7 @@ public class ControllerTest {
     * */
     @Test
     public void deleteUserByIdTest(){
-        int i = userService.deleteUserById(1);
+        int i = userService.deleteUserById("1");
         System.out.println("删除的用户数为："+i);
     }
 
@@ -146,8 +150,17 @@ public class ControllerTest {
     @Test
     public void queryDailyEnergyByIdTest(){
         Page<DailyEnergy> dailyEnergies =
-                dailyEnergyService.queryDailyEnergyById(1,0,10);
+                dailyEnergyService.queryDailyEnergyById("1",0,10);
         System.out.println(dailyEnergies);
+    }
+
+    /*
+    * 根据用户id查询用户每日能量信息数量
+    * */
+    @Test
+    public void queryCountById(){
+        Integer integer = dailyEnergyMapper.selectDailyEnergyCount("1");
+        System.out.println("用户的每日能量数为："+integer);
     }
 
     /*

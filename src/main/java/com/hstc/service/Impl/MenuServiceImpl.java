@@ -21,16 +21,16 @@ public class MenuServiceImpl implements MenuService {
     * 查询所有菜谱做分页
     * */
     @Override
-    public Page<Menu> queryAllMenu(Integer page, Integer rows) {
+    public Page<Menu> queryAllMenu(Integer page, Integer count) {
         // 查询客户列表
-        List<Menu> menuList = menuMapper.queryAllMenu(page,rows);
+        List<Menu> menuList = menuMapper.queryAllMenu(page,count);
         // 查询客户列表总记录数
         Integer total = menuMapper.selectMenuListCount();
         // 创建Page返回对象
         Page<Menu> result = new Page<>();
         result.setStart(page);
         result.setRows(menuList);
-        result.setCount(rows);
+        result.setCount(count);
         result.setTotal(total);
         return result;
     }

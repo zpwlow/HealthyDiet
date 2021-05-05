@@ -13,7 +13,7 @@ public class CollectionMenu {
     * 用户收藏菜谱记录
     * */
     @Expose
-    private int user_id; //用户id
+    private String user_id; //用户id
     @Expose
     private int menu_id; //菜谱id
     @Expose

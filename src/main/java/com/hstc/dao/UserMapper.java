@@ -14,12 +14,12 @@ public interface UserMapper {
     int updateUser(User user);
 
     //查询用户
-    User selectUserById(@Param("userId") int id);
+    User selectUserById(@Param("userId") String id);
 
     //管理员查询所有用户
     List<User> selectAllUser();
 
     //管理员删除用户
-    int deleteUser(@Param("userId") int id);
+    int deleteUser(@Param("userId") String id);
 
 }

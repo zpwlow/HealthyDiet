@@ -8,12 +8,12 @@ import java.util.List;
 public interface DailyEnergyMapper {
 
     //根据用户id查询用户的每日能量信息
-    List<DailyEnergy> queryDailyEnergyById(@Param("userId") int userId,
+    List<DailyEnergy> queryDailyEnergyById(@Param("userId") String userId,
                                            @Param("start") int start,
                                            @Param("rows") int rows);
 
     // 根据用户id查询该用户的每日能量信息数量
-    Integer selectDailyEnergyCount(@Param("userId") int userId);
+    Integer selectDailyEnergyCount(@Param("userId") String userId);
 
     //增加用户每日能量信息
     int addDailyEnergy(DailyEnergy dailyEnergy);
