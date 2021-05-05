@@ -16,7 +16,7 @@ public interface MenuMapper {
     Integer selectMenuListCount();
 
     //根据id删除一个Menu
-    int deleteMenuById(@Param("menuId") int id);
+    int deleteMenuById(@Param("menuId") int menuId);
 
     //增加一个菜谱
    int addMenu(Menu menu);
