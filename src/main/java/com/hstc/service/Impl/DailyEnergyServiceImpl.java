@@ -23,4 +23,12 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     public List<DailyEnergy> queryDailyEnergyById(int userId) {
         return dailyEnergyMapper.queryDailyEnergyById(userId);
     }
+
+    /*
+    * 增加用户每日能量信息
+    * */
+    @Override
+    public int addDailyEnergy(DailyEnergy dailyEnergy) {
+        return dailyEnergyMapper.addDailyEnergy(dailyEnergy);
+    }
 }

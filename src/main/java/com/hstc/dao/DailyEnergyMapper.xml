@@ -10,6 +10,11 @@
             and daily_energy.user_id = #{userId}
     </select>
 
+    <insert id="addDailyEnergy" parameterType="com.hstc.pojo.DailyEnergy">
+        insert into daily_energy
+        values (#{user_id},#{needed},#{consume},#{intake},#{steps},#{time});
+    </insert>
+
 
 
 </mapper>

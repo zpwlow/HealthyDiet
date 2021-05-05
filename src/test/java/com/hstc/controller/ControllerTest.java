@@ -149,4 +149,14 @@ public class ControllerTest {
                 dailyEnergyService.queryDailyEnergyById(1);
         System.out.println(dailyEnergies);
     }
+
+    /*
+    * 增加用户每日能量信息
+    * */
+    @Test
+    public void addDailyEnergyTest(){
+        DailyEnergy dailyEnergy = new DailyEnergy();
+        int i = dailyEnergyService.addDailyEnergy(dailyEnergy);
+        System.out.println("增加的数据数量为"+i);
+    }
 }
