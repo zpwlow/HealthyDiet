@@ -26,6 +26,14 @@
 
     <select id="selectAllUser" resultType="com.hstc.pojo.User">
         select * from user
+        <!-- 执行分页查询 -->
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="selectUserCount" parameterType="com.hstc.pojo.User">
+        select count(*) from user
     </select>
 
     <delete id="deleteUser" parameterType="int">

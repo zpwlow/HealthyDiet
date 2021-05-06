@@ -3,9 +3,11 @@ package com.hstc.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hstc.dao.DailyEnergyMapper;
+import com.hstc.pojo.CollectionMenu;
 import com.hstc.pojo.DailyEnergy;
 import com.hstc.pojo.Menu;
 import com.hstc.pojo.User;
+import com.hstc.service.CollectionMenuService;
 import com.hstc.service.DailyEnergyService;
 import com.hstc.service.MenuService;
 import com.hstc.service.UserService;
@@ -13,7 +15,6 @@ import com.hstc.utils.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -37,6 +38,9 @@ public class ControllerTest {
 
     @Autowired
     private DailyEnergyService dailyEnergyService;
+
+    @Autowired
+    private CollectionMenuService collectionMenuService;
 
     /*
     * 根据菜谱名模糊查询菜谱
@@ -131,7 +135,7 @@ public class ControllerTest {
     * */
     @Test
     public void selectAllUserTest(){
-        List<User> users = userService.selectAllUser();
+        Page<User> users = userService.selectAllUser(0,10);
         System.out.println(users);
     }
 
@@ -181,5 +185,12 @@ public class ControllerTest {
         DailyEnergy dailyEnergy = new DailyEnergy();
         int i = dailyEnergyService.updateDailyEnergy(dailyEnergy);
         System.out.println("修改的用户信息数量为："+i);
+    }
+
+    @Test
+    public void addCollectionMenuTest(){
+        CollectionMenu collectionMenu = new CollectionMenu("1",2,false);
+        Integer integer = collectionMenuService.addCollectionMenu(collectionMenu);
+        System.out.println("操作的数据数为："+integer);
     }
 }

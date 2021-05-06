@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.CollectionMenuMapper">
     <select id="queryCollectionMenuById" parameterType="com.hstc.pojo.CollectionMenu">
-        select username,menu_name,wheter
+        select username,menu_name,whether
         from collection_menu,menu,user
         where user.user_id=collection_menu.user_id and
               menu.menu_id=collection_menu.menu_id and
@@ -21,14 +21,13 @@
 
     <insert id="addCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
         insert into collection_menu
-        values (#{user_id},#{menu_id},#{wheter})
+        values (#{user_id},#{menu_id},#{whether})
     </insert>
 
-    <update id="updateCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
-        update collection_menu
-        set wheter=#{wheter}
+    <delete id="deleteCollectionMenu" parameterType="int">
+        delete from collection_menu
         where user_id=#{user_id} and menu_id=#{menu_id}
-    </update>
+    </delete>
 
     <select id="queryCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
         select * from collection_menu

@@ -13,20 +13,21 @@ import java.util.List;
 @Service("secommendMenuService")
 @Transactional
 public class RecommendMenuServiceImpl implements RecommendMenuService {
-    /*
-    * 增加用户历史推荐菜谱记录
-    * */
+
     @Autowired
     private RecommendMenuMapper recommendMenuMapper;
 
     /*
-    * 根据用户id 查询该用户的历史推荐菜谱记录并分页
-    * */
+     * 增加用户历史推荐菜谱记录
+     * */
     @Override
     public Integer addRecommendMenuMapper(RecommendMenu recommendMenu) {
         return recommendMenuMapper.addRecommendMenuMapper(recommendMenu);
     }
 
+    /*
+     * 根据用户id 查询该用户的历史推荐菜谱记录并分页
+     * */
     @Override
     public Page<RecommendMenu> queryRecommendMenuMapperById(String userId,
                                                             int start, int count) {

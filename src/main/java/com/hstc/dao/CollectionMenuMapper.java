@@ -10,7 +10,7 @@ public interface CollectionMenuMapper {
     Integer addCollectionMenu(CollectionMenu collectionMenu);
 
     //修改用户菜谱收藏记录
-    Integer updateCollectionMenu(CollectionMenu collectionMenu);
+    Integer deleteCollectionMenu(CollectionMenu collectionMenu);
 
     //根据用户id 查询该用户的菜谱收藏记录并分页
     List<CollectionMenu> queryCollectionMenuById(@Param("userId") String userId,

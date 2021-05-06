@@ -17,11 +17,11 @@ public class CollectionMenuServiceImpl implements CollectionMenuService {
     private CollectionMenuMapper collectionMenuMapper;
 
     /*
-    * 增加或修改用户菜谱收藏记录
+    * 增加或删除用户菜谱收藏记录
     * */
     @Override
     public Integer addCollectionMenu(CollectionMenu collectionMenu) {
-        Integer integer = collectionMenuMapper.updateCollectionMenu(collectionMenu);
+        Integer integer = collectionMenuMapper.deleteCollectionMenu(collectionMenu);
         if(integer!=1){
             integer = collectionMenuMapper.addCollectionMenu(collectionMenu);
         }

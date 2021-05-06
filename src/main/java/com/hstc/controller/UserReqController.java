@@ -2,9 +2,9 @@ package com.hstc.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hstc.pojo.Menu;
-import com.hstc.pojo.Result;
-import com.hstc.pojo.User;
+import com.hstc.pojo.*;
+import com.hstc.service.CollectionMenuService;
+import com.hstc.service.DailyEnergyService;
 import com.hstc.service.MenuService;
 import com.hstc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,12 @@ public class UserReqController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CollectionMenuService collectionMenuService;
+
+    @Autowired
+    private DailyEnergyService dailyEnergyService;
+
     private final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     /**
@@ -42,7 +48,6 @@ public class UserReqController {
         }
         System.out.println("菜谱："+menuList);
         //将List转换成json数据
-
         String json = gson.toJson(result);
         System.out.println("Json："+json);
         return json;
@@ -71,7 +76,7 @@ public class UserReqController {
     }
 
     /*
-    * 用户请求: 根据用户ID 查询用户是否存在，存在时返回用户信息，不存在请求失败。
+    * 用户请求: 根据用户ID 查询用户是否存在，存在时返回用户信息，不存在时请求失败。
     * */
     @RequestMapping(value = "/queryUserById",method = RequestMethod.GET)
     public String queryUserById(@RequestParam("userId") String userId){
@@ -87,13 +92,66 @@ public class UserReqController {
         String json = gson.toJson(result);
         System.out.println("Json："+json);
         return json;
-
     }
+
+    /*
+    * 用户请求：增加或删除用户菜谱收藏记录
+    * */
+    @RequestMapping(value = "/addCollectionMenu",method = RequestMethod.GET)
+    public String addCollectionMenu(@RequestParam String collectionMenuinfo){
+        CollectionMenu collectionMenu =
+                gson.fromJson(collectionMenuinfo, CollectionMenu.class);
+        Integer integer = collectionMenuService.addCollectionMenu(collectionMenu);
+        return getString(integer);
+    }
+
+    /*
+     * 根据用户id 和菜谱id 查询用户是否收藏
+     * */
+    @RequestMapping(value = "/queryCollectionMenu",method = RequestMethod.GET)
+    public String queryCollectionMenu(@RequestParam String collectionMenuinfo){
+        CollectionMenu collectionMenu =
+                gson.fromJson(collectionMenuinfo, CollectionMenu.class);
+        CollectionMenu collectionMenu1 = collectionMenuService.queryCollectionMenu(collectionMenu);
+        Result result;
+        if(collectionMenu1 == null){
+            result = new Result(404,"未收藏",null);
+        }else {
+            result = new Result(200,"成功",collectionMenu1);
+        }
+        System.out.println("收藏菜谱信息："+collectionMenu1);
+        //将List转换成json数据
+        String json = gson.toJson(result);
+        System.out.println("Json："+json);
+        return json;
+    }
+
+    /*
+     * 增加用户每日能量信息
+     * */
+    @RequestMapping(value = "/addDailyEnergy",method = RequestMethod.GET)
+    public String addDailyEnergy(@RequestParam String dailyEnergyinfo){
+        DailyEnergy dailyEnergy = gson.fromJson(dailyEnergyinfo, DailyEnergy.class);
+        int i = dailyEnergyService.addDailyEnergy(dailyEnergy);
+        return getString(i);
+    }
+
+    /*
+     * 修改用户每日能量信息
+     * */
+    @RequestMapping(value = "/updateDailyEnergy",method = RequestMethod.GET)
+    public String updateDailyEnergy(@RequestParam String dailyEnergyinfo){
+        DailyEnergy dailyEnergy = gson.fromJson(dailyEnergyinfo, DailyEnergy.class);
+        int i = dailyEnergyService.updateDailyEnergy(dailyEnergy);
+        return getString(i);
+    }
+
+
 
     private String getString(int i) {
         Result result;
         if(i!=1){
-            result = new Result(404,"用户信息未保存成功",null);
+            result = new Result(404,"失败",null);
         }else {
             result = new Result(200,"成功",null);
         }

@@ -17,5 +17,5 @@ public class CollectionMenu {
     @Expose
     private int menu_id; //菜谱id
     @Expose
-    private boolean wheter; //是否收藏
+    private boolean whether; //是否收藏
 }
