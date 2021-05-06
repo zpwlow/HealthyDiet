@@ -67,6 +67,10 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.updateMenu(menu);
     }
 
+    @Override
+    public List<Menu> recommendMenuList(String diseases, String flavor) {
+        return menuMapper.recommendMenuList(diseases,flavor);
+    }
 
 
 }

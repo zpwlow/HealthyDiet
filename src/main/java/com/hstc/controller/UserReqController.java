@@ -10,6 +10,7 @@ import com.hstc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.element.VariableElement;
 import java.util.List;
 /*
 * @RestController //有请求时，将返回的数据输出前端
@@ -40,17 +41,7 @@ public class UserReqController {
     public String selectMenuByName(@RequestParam("name") String name){
         String menuName = "%" + name +"%";
         List<Menu> menuList = menuService.queryMenuByName(menuName);
-        Result result;
-        if(menuList == null){
-            result = new Result(404,"资源不存在",null);
-        }else {
-            result = new Result(200,"成功",menuList);
-        }
-        System.out.println("菜谱："+menuList);
-        //将List转换成json数据
-        String json = gson.toJson(result);
-        System.out.println("Json："+json);
-        return json;
+        return getMenuJson(menuList);
     }
 
     /*
@@ -146,6 +137,53 @@ public class UserReqController {
         return getString(i);
     }
 
+    /*
+    * 推荐用户早餐
+    * */
+    @RequestMapping(value = "/queryBreakfast", method = RequestMethod.GET)
+    public String querBreakfast(@RequestParam("userId") String userId){
+        //User user = userService.selectUserById(userId);
+        List<Menu> menuList = menuService.recommendMenuList("早餐", null);
+        return getMenuJson(menuList);
+    }
+
+    /*
+     * 推荐用户早餐
+     * */
+    @RequestMapping(value = "/queryLunch", method = RequestMethod.GET)
+    public String queryLunch(@RequestParam("userId") String userId){
+        User user = userService.selectUserById(userId);
+        String diseases = user.getConvalescent();
+        String medical_history = user.getMedical_history();
+        String flavor = user.getFlavor();
+        if(diseases.equals("无") && medical_history.equals("无")){
+            diseases=null;
+        }
+        if(diseases.equals("无") && !medical_history.equals("无")){
+            diseases = medical_history;
+        }
+        flavor = "%" +flavor +"%";
+        System.out.println("diseases"+diseases+"   flavor:" +flavor);
+        List<Menu> menuList = menuService.recommendMenuList(diseases, flavor);
+        if (menuList == null || menuList.size()==0){
+            menuList = menuService.recommendMenuList(null, flavor);
+        }
+        return getMenuJson(menuList);
+    }
+
+    private String getMenuJson(List<Menu> menuList){
+        Result result;
+        if(menuList == null || menuList.size()==0){
+            result = new Result(404,"失败",null);
+        }else {
+            result = new Result(200,"成功",menuList);
+        }
+        System.out.println("菜谱："+menuList);
+        //将List转换成json数据
+        String json = gson.toJson(result);
+        System.out.println("Json："+json);
+        return json;
+    }
 
 
     private String getString(int i) {

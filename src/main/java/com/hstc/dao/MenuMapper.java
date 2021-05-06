@@ -24,5 +24,7 @@ public interface MenuMapper {
     //更新Menu
     int updateMenu(Menu menu);
 
-
+    //推荐用户菜谱
+    List<Menu> recommendMenuList(@Param("diseases") String diseases,
+                                 @Param("flavor") String flavor);
 }

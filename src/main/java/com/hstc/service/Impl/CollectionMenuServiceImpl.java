@@ -2,7 +2,6 @@ package com.hstc.service.Impl;
 
 import com.hstc.dao.CollectionMenuMapper;
 import com.hstc.pojo.CollectionMenu;
-import com.hstc.pojo.DailyEnergy;
 import com.hstc.service.CollectionMenuService;
 import com.hstc.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;

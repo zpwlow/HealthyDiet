@@ -51,9 +51,26 @@
         select *
         from menu
         <!-- 执行分页查询 -->
-        <if test="start !=null and rows != null">
+        <if test="start !=n ull and rows != null">
             limit #{start},#{rows}
         </if>
+    </select>
+
+    <select id="recommendMenuList" resultMap="menuMap">
+        select *
+        from menu
+        where
+        <if test="diseases != null and flavor != null">
+            diseases=#{diseases} and flavor like #{flavor}
+        </if>
+
+        <if test="diseases != null and flavor == null">
+            diseases=#{diseases}
+        </if>
+        <if test="diseases == null and flavor != null ">
+            flavor like #{flavor}
+        </if>
+        ORDER BY RAND() LIMIT 0,5
     </select>
 
     <!-- 根据删除菜谱 -->
@@ -79,8 +96,5 @@
     <select id="selectMenuListCount" resultType="Integer">
         select count(*) from menu
     </select>
-
-
-
 
 </mapper>
