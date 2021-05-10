@@ -31,7 +31,7 @@ public class CollectionMenuServiceImpl implements CollectionMenuService {
     * 根据用户id 查询该用户的菜谱收藏记录并分页
     * */
     @Override
-    public Page<CollectionMenu> queryCollectionMenuById(String userId, int start, int count) {
+    public Page<CollectionMenu> queryCollectionMenuById(String userId, Integer start, Integer count) {
         List<CollectionMenu> collectionMenuList =
                 collectionMenuMapper.queryCollectionMenuById(userId, start, count);
         Integer total = collectionMenuMapper.queryCollectionMenuListCount(userId);

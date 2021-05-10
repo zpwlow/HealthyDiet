@@ -3,14 +3,8 @@ package com.hstc.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hstc.dao.DailyEnergyMapper;
-import com.hstc.pojo.CollectionMenu;
-import com.hstc.pojo.DailyEnergy;
-import com.hstc.pojo.Menu;
-import com.hstc.pojo.User;
-import com.hstc.service.CollectionMenuService;
-import com.hstc.service.DailyEnergyService;
-import com.hstc.service.MenuService;
-import com.hstc.service.UserService;
+import com.hstc.pojo.*;
+import com.hstc.service.*;
 import com.hstc.utils.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +13,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -41,6 +39,9 @@ public class ControllerTest {
 
     @Autowired
     private CollectionMenuService collectionMenuService;
+
+    @Autowired
+    private RecommendMenuService recommendMenuService;
 
     /*
     * 根据菜谱名模糊查询菜谱
@@ -189,8 +190,36 @@ public class ControllerTest {
 
     @Test
     public void addCollectionMenuTest(){
-        CollectionMenu collectionMenu = new CollectionMenu("1",2,false);
+        CollectionMenu collectionMenu = new CollectionMenu("1",2,true);
         Integer integer = collectionMenuService.addCollectionMenu(collectionMenu);
         System.out.println("操作的数据数为："+integer);
+    }
+
+    @Test
+    public void addRecommendMenuTest(){
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datestr = format.format(date);
+        RecommendMenu recommendMenu = new RecommendMenu("1",2,datestr,false);
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(recommendMenu);
+        System.out.println(json);
+        Integer integer = recommendMenuService.addRecommendMenuMapper(recommendMenu);
+        System.out.println("保存的数据量为：" + integer);
+    }
+
+    @Test
+    public void updateRecommendMenuTest(){
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datestr = format.format(date);
+        RecommendMenu recommendMenu = new RecommendMenu("1",2,datestr,true);
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(recommendMenu);
+        System.out.println(json);
+        RecommendMenu recommendMenu1 = gson.fromJson(json, RecommendMenu.class);
+        System.out.println(recommendMenu1.getTime().getClass());
+        Integer integer = recommendMenuService.updateRecommendMenu(recommendMenu1);
+        System.out.println("修改的数据量为：" + integer);
     }
 }

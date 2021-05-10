@@ -3,15 +3,16 @@ package com.hstc.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hstc.pojo.*;
-import com.hstc.service.CollectionMenuService;
-import com.hstc.service.DailyEnergyService;
-import com.hstc.service.MenuService;
-import com.hstc.service.UserService;
+import com.hstc.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.lang.model.element.VariableElement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
 /*
 * @RestController //有请求时，将返回的数据输出前端
 * */
@@ -31,7 +32,12 @@ public class UserReqController {
     @Autowired
     private DailyEnergyService dailyEnergyService;
 
+    @Autowired
+    private RecommendMenuService recommendMenuService;
+
     private final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+    private final String datetime=null;
 
     /**
      * 用户请求，根据菜谱名查询，返回用户菜谱的详细信息
@@ -92,6 +98,7 @@ public class UserReqController {
     public String addCollectionMenu(@RequestParam String collectionMenuinfo){
         CollectionMenu collectionMenu =
                 gson.fromJson(collectionMenuinfo, CollectionMenu.class);
+        System.out.println(collectionMenu);
         Integer integer = collectionMenuService.addCollectionMenu(collectionMenu);
         return getString(integer);
     }
@@ -103,7 +110,9 @@ public class UserReqController {
     public String queryCollectionMenu(@RequestParam String collectionMenuinfo){
         CollectionMenu collectionMenu =
                 gson.fromJson(collectionMenuinfo, CollectionMenu.class);
-        CollectionMenu collectionMenu1 = collectionMenuService.queryCollectionMenu(collectionMenu);
+        System.out.println(collectionMenu);
+        CollectionMenu collectionMenu1 =
+                collectionMenuService.queryCollectionMenu(collectionMenu);
         Result result;
         if(collectionMenu1 == null){
             result = new Result(404,"未收藏",null);
@@ -142,24 +151,25 @@ public class UserReqController {
     * */
     @RequestMapping(value = "/queryBreakfast", method = RequestMethod.GET)
     public String querBreakfast(@RequestParam("userId") String userId){
-        //User user = userService.selectUserById(userId);
         List<Menu> menuList = menuService.recommendMenuList("早餐", null);
+        saveCollectionMenu(userId,menuList);
         return getMenuJson(menuList);
     }
 
     /*
-     * 推荐用户早餐
+     * 推荐用户午餐
      * */
     @RequestMapping(value = "/queryLunch", method = RequestMethod.GET)
     public String queryLunch(@RequestParam("userId") String userId){
         User user = userService.selectUserById(userId);
+        System.out.println(user);
         String diseases = user.getConvalescent();
         String medical_history = user.getMedical_history();
         String flavor = user.getFlavor();
-        if(diseases.equals("无") && medical_history.equals("无")){
+        if(diseases.equals("无")){
             diseases=null;
         }
-        if(diseases.equals("无") && !medical_history.equals("无")){
+        if(Objects.equals(diseases, "无") && !medical_history.equals("无")){
             diseases = medical_history;
         }
         flavor = "%" +flavor +"%";
@@ -168,7 +178,44 @@ public class UserReqController {
         if (menuList == null || menuList.size()==0){
             menuList = menuService.recommendMenuList(null, flavor);
         }
+        saveCollectionMenu(userId,menuList);
         return getMenuJson(menuList);
+    }
+
+    /*
+    * 修改用户用户历史推荐菜谱记录
+    * */
+    @RequestMapping(value = "/updateRecommendMenu", method = RequestMethod.GET)
+    public String updateRecommendMenu(@RequestParam String recommendMenuinfo){
+        RecommendMenu recommendMenu =
+                gson.fromJson(recommendMenuinfo, RecommendMenu.class);
+        System.out.println(recommendMenu);
+        Integer i = recommendMenuService.updateRecommendMenu(recommendMenu);
+        return getString(i);
+    }
+
+    /*
+    * 用户请求收藏菜谱记录
+    * */
+    @RequestMapping(value = "/queryCollectionMenuList", method = RequestMethod.GET)
+    public String queryCollectionMenuList(@RequestParam("userId") String userId){
+        List<Menu> menuList = menuService.queryCollectionMenuList(userId);
+        return getMenuJson(menuList);
+    }
+
+
+    /*
+    * 推荐用户每日食谱后保存数据库
+    * */
+    private void saveCollectionMenu(String userId, List<Menu> menuList){
+        java.util.Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datestr = format.format(date);
+        for (Menu menu:menuList){
+            RecommendMenu recommendMenu =
+                    new RecommendMenu(userId, menu.getMenu_id(), datestr, false);
+            recommendMenuService.addRecommendMenuMapper(recommendMenu);
+        }
     }
 
     private String getMenuJson(List<Menu> menuList){

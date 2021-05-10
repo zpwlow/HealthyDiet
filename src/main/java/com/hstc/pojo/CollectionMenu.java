@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class CollectionMenu {
     /*
     * 用户收藏菜谱记录
@@ -18,4 +18,9 @@ public class CollectionMenu {
     private int menu_id; //菜谱id
     @Expose
     private boolean whether; //是否收藏
+
+    public CollectionMenu(String user_id, int menu_id) {
+        this.user_id = user_id;
+        this.menu_id = menu_id;
+    }
 }

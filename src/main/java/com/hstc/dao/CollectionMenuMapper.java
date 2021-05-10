@@ -14,8 +14,8 @@ public interface CollectionMenuMapper {
 
     //根据用户id 查询该用户的菜谱收藏记录并分页
     List<CollectionMenu> queryCollectionMenuById(@Param("userId") String userId,
-                                           @Param("start") int start,
-                                           @Param("rows") int rows);
+                                           @Param("start") Integer start,
+                                           @Param("rows") Integer rows);
 
     //根据用户id 查询该用户的收藏菜谱总记录数
     Integer queryCollectionMenuListCount(@Param("userId") String userId);

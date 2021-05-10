@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
+
 
 @Data
 @AllArgsConstructor
@@ -19,7 +19,9 @@ public class RecommendMenu {
     @Expose
     private int menu_id; //菜谱id
     @Expose
-    private Time time;  //时间
+    private String time;  //时间
     @Expose
     private boolean whether; //用户是否选择菜谱
+
+
 }

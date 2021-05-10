@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("secommendMenuService")
+@Service("recommendMenuService")
 @Transactional
 public class RecommendMenuServiceImpl implements RecommendMenuService {
 
@@ -41,6 +41,14 @@ public class RecommendMenuServiceImpl implements RecommendMenuService {
         result.setCount(count);
         result.setTotal(total);
         return result;
+    }
+
+    /*
+    * 修改用户历史推荐菜谱记录
+    * */
+    @Override
+    public Integer updateRecommendMenu(RecommendMenu recommendMenu) {
+        return recommendMenuMapper.updateRecommendMenu(recommendMenu);
     }
 
 }

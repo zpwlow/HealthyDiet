@@ -45,16 +45,27 @@
         select *
         from menu
         where menu_name like #{menuName}
+            limit 0,50
     </select>
 
     <select id="queryAllMenu"  resultMap="menuMap">
         select *
         from menu
         <!-- 执行分页查询 -->
-        <if test="start !=n ull and rows != null">
+        <if test="start !=null and rows != null">
             limit #{start},#{rows}
         </if>
     </select>
+
+    <select id="queryCollectionMenuList" resultMap="menuMap">
+        select menu.menu_id,menu_name,flavor,calorie,
+               technology,make_time,diseases,menu_url
+        from menu,collection_menu
+        where menu.menu_id=collection_menu.menu_id
+          and collection_menu.user_id=#{userId}
+    </select>
+
+
 
     <select id="recommendMenuList" resultMap="menuMap">
         select *

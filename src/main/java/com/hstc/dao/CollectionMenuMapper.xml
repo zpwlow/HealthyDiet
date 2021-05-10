@@ -15,6 +15,7 @@
         </if>
     </select>
 
+
     <select id="queryCollectionMenuListCount" parameterType="com.hstc.pojo.CollectionMenu">
         select count(*) from collection_menu where user_id=#{userId}
     </select>
@@ -24,12 +25,12 @@
         values (#{user_id},#{menu_id},#{whether})
     </insert>
 
-    <delete id="deleteCollectionMenu" parameterType="int">
+    <delete id="deleteCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
         delete from collection_menu
         where user_id=#{user_id} and menu_id=#{menu_id}
     </delete>
 
-    <select id="queryCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">
+    <select id="queryCollectionMenu" resultType="com.hstc.pojo.CollectionMenu">
         select * from collection_menu
         where user_id=#{user_id} and menu_id=#{menu_id}
     </select>

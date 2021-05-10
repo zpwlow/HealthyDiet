@@ -26,4 +26,8 @@ public interface MenuService {
     //推荐用户菜谱
     List<Menu> recommendMenuList(String diseases, String flavor);
 
+    //查询用户收藏菜谱
+    List<Menu> queryCollectionMenuList(String userId);
+
+
 }

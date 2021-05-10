@@ -11,7 +11,7 @@ public interface CollectionMenuService {
     Integer addCollectionMenu(CollectionMenu collectionMenu);
 
     //根据用户id 查询该用户的菜谱收藏记录并分页
-    Page<CollectionMenu> queryCollectionMenuById(String userId, int start, int count);
+    Page<CollectionMenu> queryCollectionMenuById(String userId, Integer start, Integer count);
 
     //根据用户id 和菜谱id 查询用户是否收藏
     CollectionMenu queryCollectionMenu(CollectionMenu collectionMenu);

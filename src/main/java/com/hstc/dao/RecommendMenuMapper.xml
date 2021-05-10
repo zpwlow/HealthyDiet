@@ -5,8 +5,14 @@
 <mapper namespace="com.hstc.dao.RecommendMenuMapper">
     <insert id="addRecommendMenuMapper" parameterType="com.hstc.pojo.RecommendMenu">
         insert into recommend_menu
-        values (#{user_id},#{menu_id},#{time},#{wheter})
+        values (#{user_id},#{menu_id},#{time},#{whether})
     </insert>
+
+    <update id="updateRecommendMenu" parameterType="com.hstc.pojo.RecommendMenu">
+        update recommend_menu
+        set whether=#{whether}
+        where user_id=#{user_id} and menu_id=#{menu_id} and time=#{time}
+    </update>
 
     <select id="queryRecommendMenuMapperById" parameterType="com.hstc.pojo.RecommendMenu">
         select username,menu_name,time,whether

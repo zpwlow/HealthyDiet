@@ -73,4 +73,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
 
+    @Override
+    public List<Menu> queryCollectionMenuList(String userId) {
+        return menuMapper.queryCollectionMenuList(userId);
+    }
+
+
+
+
 }

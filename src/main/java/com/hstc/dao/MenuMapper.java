@@ -27,4 +27,9 @@ public interface MenuMapper {
     //推荐用户菜谱
     List<Menu> recommendMenuList(@Param("diseases") String diseases,
                                  @Param("flavor") String flavor);
+
+    //查询用户收藏菜谱
+    List<Menu> queryCollectionMenuList(@Param("userId") String userId);
+
+
 }
