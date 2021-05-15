@@ -37,7 +37,7 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     * 增加用户每日能量信息
     * */
     @Override
-    public int addDailyEnergy(DailyEnergy dailyEnergy) {
+    public Integer addDailyEnergy(DailyEnergy dailyEnergy) {
         return dailyEnergyMapper.addDailyEnergy(dailyEnergy);
     }
 
@@ -45,7 +45,12 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     * 修改用户每日能量信息
     * */
     @Override
-    public int updateDailyEnergy(DailyEnergy dailyEnergy) {
+    public Integer updateDailyEnergy(DailyEnergy dailyEnergy) {
         return dailyEnergyMapper.updateDailyEnergy(dailyEnergy);
+    }
+
+    @Override
+    public DailyEnergy queryDailyEnergyByUser(DailyEnergy dailyEnergy) {
+        return dailyEnergyMapper.queryDailyEnergyByUser(dailyEnergy);
     }
 }

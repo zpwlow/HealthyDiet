@@ -14,6 +14,12 @@
         </if>
     </select>
 
+    <select id="queryNutritionRecordByUser" resultType="com.hstc.pojo.NutritionRecord">
+        select *
+        from nutrition_record
+        where user_id=#{user_id} and time=#{time}
+    </select>
+
     <select id="selectNutritionRecordCount" resultType="Integer">
         select count(*) from nutrition_record where user_id = #{userId}
     </select>
@@ -25,7 +31,7 @@
 
     <update id="updateNutritionRecord" parameterType="com.hstc.pojo.NutritionRecord">
         update nutrition_record
-        set content=#{content}
+        set content=content+#{content}
         where user_id=#{user_id} and name=#{name}
             and time=#{time}
     </update>

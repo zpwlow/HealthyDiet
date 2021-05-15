@@ -31,5 +31,11 @@
         where user_id=#{user_id} and time=#{time}
     </update>
 
+    <select id="queryDailyEnergyByUser" resultType="com.hstc.pojo.DailyEnergy">
+        select user_id,needed,consume,intake,steps,time
+        from daily_energy
+        where user_id=#{user_id} and time=#{time}
+    </select>
+
 
 </mapper>

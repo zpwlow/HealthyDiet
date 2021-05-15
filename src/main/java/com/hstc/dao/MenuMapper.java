@@ -31,5 +31,6 @@ public interface MenuMapper {
     //查询用户收藏菜谱
     List<Menu> queryCollectionMenuList(@Param("userId") String userId);
 
-
+    //根据菜谱id 查询菜谱
+    Menu queryMenuById(@Param("menuId") Integer menuId);
 }

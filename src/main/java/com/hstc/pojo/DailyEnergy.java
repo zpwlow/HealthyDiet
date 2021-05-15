@@ -25,5 +25,10 @@ public class DailyEnergy {
     @Expose
     private int steps;  //每日步数
     @Expose
-    private Time time;  //时间
+    private String time;  //时间
+
+    public DailyEnergy(String user_id, String time) {
+        this.user_id = user_id;
+        this.time = time;
+    }
 }

@@ -51,5 +51,10 @@ public class NutritionRecordServiceImpl implements NutritionRecordService {
         return nutritionRecordMapper.updateNutritionRecord(nutritionRecord);
     }
 
+    @Override
+    public List<NutritionRecord> queryNutritionRecordByUser(NutritionRecord nutritionRecord) {
+        return nutritionRecordMapper.queryNutritionRecordByUser(nutritionRecord);
+    }
+
 
 }

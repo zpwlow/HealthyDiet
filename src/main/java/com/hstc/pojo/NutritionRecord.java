@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
 
 @Data
 @NoArgsConstructor
@@ -16,15 +15,21 @@ public class NutritionRecord {
     * */
     @Expose
     private String user_id; //用户id
-    @Expose String username; //用户名
+    @Expose
+    private  String username; //用户名
     @Expose
     private String name; //营养素名
     @Expose
     private Double content; //含量
     @Expose
-    private Time time; //时间
+    private String  time; //时间
 
-    public NutritionRecord(String user_id, String name, Double content, Time time) {
+    public NutritionRecord(String user_id, String time) {
+        this.user_id = user_id;
+        this.time = time;
+    }
+
+    public NutritionRecord(String user_id, String name, Double content, String time) {
         this.user_id = user_id;
         this.name = name;
         this.content = content;

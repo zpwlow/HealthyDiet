@@ -35,6 +35,9 @@ public class UserReqController {
     @Autowired
     private RecommendMenuService recommendMenuService;
 
+    @Autowired
+    private NutritionRecordService nutritionRecordService;
+
     private final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     private final String datetime=null;
@@ -147,6 +150,25 @@ public class UserReqController {
     }
 
     /*
+    * 根据用户id 和时间查询用户的每日能量信息
+    * */
+    @RequestMapping(value = "/queryDailyEnergyByUser",method = RequestMethod.GET)
+    public String queryDailyEnergyByUser(@RequestParam String dailyEnergyinfo){
+        DailyEnergy dailyEnergy = gson.fromJson(dailyEnergyinfo, DailyEnergy.class);
+        DailyEnergy dailyEnergyList = dailyEnergyService.queryDailyEnergyByUser(dailyEnergy);
+        Result result;
+        if(dailyEnergyList == null){
+            result = new Result(404,"失败",null);
+        }else {
+            result = new Result(200,"成功",dailyEnergyList);
+        }
+        System.out.println("菜谱："+dailyEnergyList);
+        //将List转换成json数据
+        String json = gson.toJson(result);
+        System.out.println("Json："+json);
+        return json;
+    }
+    /*
     * 推荐用户早餐
     * */
     @RequestMapping(value = "/queryBreakfast", method = RequestMethod.GET)
@@ -191,6 +213,23 @@ public class UserReqController {
                 gson.fromJson(recommendMenuinfo, RecommendMenu.class);
         System.out.println(recommendMenu);
         Integer i = recommendMenuService.updateRecommendMenu(recommendMenu);
+        if (i == 1){
+            Menu menu = menuService.queryMenuById(recommendMenu.getMenu_id());
+            List<MenuNutrient> menuNutrientList = menu.getMenuNutrientList();
+            java.util.Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String datestr = format.format(date);
+            for (MenuNutrient menuNutrient:menuNutrientList){
+                NutritionRecord nutritionRecord =
+                        new NutritionRecord(recommendMenu.getUser_id(),
+                                menuNutrient.getName(),
+                                Double.parseDouble(menuNutrient.getWeight()), datestr);
+                int i1 = nutritionRecordService.updateNutritionRecord(nutritionRecord);
+                if(i1 != 1){
+                    nutritionRecordService.addNutritionRecord(nutritionRecord);
+                }
+            }
+        }
         return getString(i);
     }
 
@@ -203,6 +242,27 @@ public class UserReqController {
         return getMenuJson(menuList);
     }
 
+    /*
+    * 用户请求每日营养记录
+    * */
+    @RequestMapping(value = "/queryNutritionRecordByUser",method = RequestMethod.GET)
+    public String queryNutritionRecordByUser(@RequestParam String nutritionRecordinfo){
+        NutritionRecord nutritionRecord =
+                gson.fromJson(nutritionRecordinfo, NutritionRecord.class);
+        List<NutritionRecord> nutritionRecords =
+                nutritionRecordService.queryNutritionRecordByUser(nutritionRecord);
+        Result result;
+        if(nutritionRecords == null || nutritionRecords.size()==0){
+            result = new Result(404,"失败",null);
+        }else {
+            result = new Result(200,"成功",nutritionRecords);
+        }
+        System.out.println("菜谱："+nutritionRecords);
+        //将List转换成json数据
+        String json = gson.toJson(result);
+        System.out.println("Json："+json);
+        return json;
+    }
 
     /*
     * 推荐用户每日食谱后保存数据库

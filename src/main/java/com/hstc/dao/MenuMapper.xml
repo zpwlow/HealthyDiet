@@ -57,6 +57,12 @@
         </if>
     </select>
 
+    <select id="queryMenuById" resultMap="menuMap">
+        select *
+        from menu
+        where menu_id=#{menuId}
+    </select>
+
     <select id="queryCollectionMenuList" resultMap="menuMap">
         select menu.menu_id,menu_name,flavor,calorie,
                technology,make_time,diseases,menu_url
