@@ -14,8 +14,8 @@
         where user_id=#{user_id} and menu_id=#{menu_id} and time=#{time}
     </update>
 
-    <select id="queryRecommendMenuMapperById" parameterType="com.hstc.pojo.RecommendMenu">
-        select username,menu_name,time,whether
+    <select id="queryRecommendMenuMapperById" resultType="com.hstc.pojo.RecommendMenu">
+        select user.user_id, username,menu.menu_id,menu_name,time,whether
         from recommend_menu,user,menu
         where user.user_id=recommend_menu.user_id and
               menu.menu_id=recommend_menu.menu_id and
@@ -27,8 +27,8 @@
     </select>
 
     <select id="queryRecommendMenuMapperListCount"
-            parameterType="com.hstc.pojo.RecommendMenu">
-        select count(*) from recommend_menu where user_id=#{userId}
+            resultType="Integer">
+        select count(*) from recommend_menu where user_id like #{userId}
     </select>
 
 </mapper>

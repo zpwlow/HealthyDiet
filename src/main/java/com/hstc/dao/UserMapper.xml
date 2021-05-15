@@ -32,7 +32,7 @@
         </if>
     </select>
 
-    <select id="selectUserCount" parameterType="com.hstc.pojo.User">
+    <select id="selectUserCount" resultType="Integer">
         select count(*) from user
     </select>
 

@@ -43,6 +43,9 @@ public class ControllerTest {
     @Autowired
     private RecommendMenuService recommendMenuService;
 
+    @Autowired
+    private NutritionRecordService nutritionRecordService;
+
     /*
     * 根据菜谱名模糊查询菜谱
     * */
@@ -209,6 +212,13 @@ public class ControllerTest {
     }
 
     @Test
+    public void queryCollectionMenuByIdTest(){
+        Page<CollectionMenu> collectionMenuPage =
+                collectionMenuService.queryCollectionMenuById("opMxL4-VEM3uvSIak7SOlOk-O_Fs", 0, 6);
+        System.out.println(collectionMenuPage);
+    }
+
+    @Test
     public void updateRecommendMenuTest(){
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -222,4 +232,20 @@ public class ControllerTest {
         Integer integer = recommendMenuService.updateRecommendMenu(recommendMenu1);
         System.out.println("修改的数据量为：" + integer);
     }
+
+    @Test
+    public void RecommendMenuTest(){
+        Page<RecommendMenu> recommendMenuPage =
+                recommendMenuService.queryRecommendMenuMapperById("opMxL4-VEM3uvSIak7SOlOk-O_Fs", 0, 6);
+        System.out.println(recommendMenuPage);
+    }
+
+    @Test
+    public void queryNutritionRecordTest(){
+        Page<NutritionRecord> nutritionRecordPage =
+                nutritionRecordService.queryNutritionRecordById("opMxL4-VEM3uvSIak7SOlOk-O_Fs", 0, 6);
+        System.out.println(nutritionRecordPage);
+    }
+
+
 }

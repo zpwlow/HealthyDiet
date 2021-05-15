@@ -16,10 +16,18 @@ public class NutritionRecord {
     * */
     @Expose
     private String user_id; //用户id
+    @Expose String username; //用户名
     @Expose
     private String name; //营养素名
     @Expose
     private Double content; //含量
     @Expose
     private Time time; //时间
+
+    public NutritionRecord(String user_id, String name, Double content, Time time) {
+        this.user_id = user_id;
+        this.name = name;
+        this.content = content;
+        this.time = time;
+    }
 }

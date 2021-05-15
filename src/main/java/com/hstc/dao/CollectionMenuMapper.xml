@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.CollectionMenuMapper">
-    <select id="queryCollectionMenuById" parameterType="com.hstc.pojo.CollectionMenu">
+    <select id="queryCollectionMenuById" resultType="com.hstc.pojo.CollectionMenu">
         select username,menu_name,whether
         from collection_menu,menu,user
         where user.user_id=collection_menu.user_id and
@@ -16,8 +16,8 @@
     </select>
 
 
-    <select id="queryCollectionMenuListCount" parameterType="com.hstc.pojo.CollectionMenu">
-        select count(*) from collection_menu where user_id=#{userId}
+    <select id="queryCollectionMenuListCount" resultType="Integer">
+        select count(*) from collection_menu where user_id like #{userId}
     </select>
 
     <insert id="addCollectionMenu" parameterType="com.hstc.pojo.CollectionMenu">

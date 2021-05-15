@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.DailyEnergyMapper">
-    <select id="queryDailyEnergyById" parameterType="com.hstc.pojo.DailyEnergy">
+    <select id="queryDailyEnergyById" resultType="com.hstc.pojo.DailyEnergy">
         select username,needed,consume,intake,steps,time
         from daily_energy,user
         where daily_energy.user_id = user.user_id
@@ -16,7 +16,7 @@
 
     <!-- 查询菜谱总数 -->
     <select id="selectDailyEnergyCount" resultType="Integer">
-        select count(*) from daily_energy where user_id = #{userId}
+        select count(*) from daily_energy where user_id like #{userId}
     </select>
 
     <insert id="addDailyEnergy" parameterType="com.hstc.pojo.DailyEnergy">

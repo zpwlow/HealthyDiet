@@ -152,7 +152,7 @@ public class UserReqController {
     @RequestMapping(value = "/queryBreakfast", method = RequestMethod.GET)
     public String querBreakfast(@RequestParam("userId") String userId){
         List<Menu> menuList = menuService.recommendMenuList("早餐", null);
-        saveCollectionMenu(userId,menuList);
+        //saveCollectionMenu(userId,menuList);
         return getMenuJson(menuList);
     }
 
@@ -178,7 +178,7 @@ public class UserReqController {
         if (menuList == null || menuList.size()==0){
             menuList = menuService.recommendMenuList(null, flavor);
         }
-        saveCollectionMenu(userId,menuList);
+        //saveCollectionMenu(userId,menuList);
         return getMenuJson(menuList);
     }
 

@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.NutritionRecordMapper">
-    <select id="queryNutritionRecordById" parameterType="com.hstc.pojo.NutritionRecord">
-        select username,name,content,time
+    <select id="queryNutritionRecordById" resultType="com.hstc.pojo.NutritionRecord">
+        select user.user_id,username,name,content,time
         from nutrition_record,user
         where nutrition_record.user_id = user.user_id
             and user.user_id = #{userId}
@@ -14,7 +14,7 @@
         </if>
     </select>
 
-    <select id="selectNutritionRecordCount" parameterType="int">
+    <select id="selectNutritionRecordCount" resultType="Integer">
         select count(*) from nutrition_record where user_id = #{userId}
     </select>
 

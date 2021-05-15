@@ -17,11 +17,20 @@ public class RecommendMenu {
     @Expose
     private String user_id; //用户id
     @Expose
+    private String username;
+    @Expose
     private int menu_id; //菜谱id
+    @Expose
+    private String menu_name;
     @Expose
     private String time;  //时间
     @Expose
     private boolean whether; //用户是否选择菜谱
 
-
+    public RecommendMenu(String user_id, int menu_id, String time, boolean whether) {
+        this.user_id = user_id;
+        this.menu_id = menu_id;
+        this.time = time;
+        this.whether = whether;
+    }
 }
