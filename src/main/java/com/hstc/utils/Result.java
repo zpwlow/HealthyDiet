@@ -1,4 +1,4 @@
-package com.hstc.pojo;
+package com.hstc.utils;
 
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
