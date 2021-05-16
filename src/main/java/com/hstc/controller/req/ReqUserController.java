@@ -8,18 +8,14 @@ import com.hstc.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 /*
 * @RestController //有请求时，将返回的数据输出前端
+* 用户请求个人信息
 * */
 @RestController
 @RequestMapping("/userReq")
-public class UserReqController {
+public class ReqUserController {
 
     @Autowired
     private UserService userService;

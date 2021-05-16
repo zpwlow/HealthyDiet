@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/userReq")
-public class DailyEnergyReqController {
+public class ReqDailyEnergyController {
 
     @Autowired
     private DailyEnergyService dailyEnergyService;

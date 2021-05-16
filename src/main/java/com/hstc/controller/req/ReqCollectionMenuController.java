@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/userReq")
-public class CollectionMenuReqController {
+public class ReqCollectionMenuController {
 
     @Autowired
     private MenuService menuService;

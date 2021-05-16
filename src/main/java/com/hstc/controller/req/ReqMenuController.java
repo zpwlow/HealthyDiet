@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/userReq")
-public class MenuReqController {
+public class ReqMenuController {
 
     @Autowired
     private MenuService menuService;

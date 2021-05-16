@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/userReq")
-public class NutritionRecordReqController {
+public class ReqNutritionRecordController {
     @Autowired
     private NutritionRecordService nutritionRecordService;
 

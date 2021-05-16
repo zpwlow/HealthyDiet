@@ -27,7 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/userReq")
-public class RecommendMenuReqController {
+public class ReqRecommendMenuController {
 
     @Autowired
     private MenuService menuService;
