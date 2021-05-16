@@ -3,11 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.DailyEnergyMapper">
+
+    <resultMap id="dailyEnergyMap" type="com.hstc.pojo.DailyEnergy">
+        <result property="user_id" column="user_id" />
+        <result property="username" column="username" />
+        <result property="needed" column="needed" />
+        <result property="consume" column="consume" />
+        <result property="intake" column="intake" />
+        <result property="steps" column="steps" />
+        <result property="time" column="time" />
+    </resultMap>
+
+    <select id="queryAllDailyEnergy" resultMap="dailyEnergyMap">
+        select daily_energy.user_id as user_id,username,needed,consume,intake,steps,time
+        from daily_energy,user
+        <where>
+            user.user_id=daily_energy.user_id
+            <if test="userId != null">
+                and daily_energy.user_id=#{userId}
+            </if>
+            <if test="username != null">
+                and user.username like "%"#{username}"%"
+            </if>
+            <!-- 执行分页查询 -->
+            <if test="start != null and rows != null">
+                limit #{start},#{rows}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryDailyEnergyCount" resultType="int">
+        select count(*) from daily_energy,user
+        <where>
+            user.user_id=daily_energy.user_id
+            <if test="userId != null">
+                and daily_energy.user_id=#{userId}
+            </if>
+            <if test="username != null">
+                and user.username like "%"#{username}"%"
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteDailyEnergy">
+        delete from daily_energy
+        where user_id=#{userId} and time=#{time}
+    </delete>
+
     <select id="queryDailyEnergyById" resultType="com.hstc.pojo.DailyEnergy">
         select username,needed,consume,intake,steps,time
         from daily_energy,user
         where daily_energy.user_id = user.user_id
-            and daily_energy.user_id = #{userId}
+        and daily_energy.user_id = #{userId}
         <!-- 执行分页查询 -->
         <if test="start !=null and rows != null">
             limit #{start},#{rows}
@@ -36,6 +83,5 @@
         from daily_energy
         where user_id=#{user_id} and time=#{time}
     </select>
-
 
 </mapper>

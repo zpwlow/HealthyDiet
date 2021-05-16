@@ -3,12 +3,54 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.CollectionMenuMapper">
+
+    <resultMap id="collectionMenuMap" type="com.hstc.pojo.CollectionMenu">
+        <result property="user_id" column="user_id" />
+        <result property="username" column="username" />
+        <result property="menu_id" column="menu_id" />
+        <result property="menu_name" column="menu_name" />
+        <result property="whether" column="whether" />
+    </resultMap>
+
+    <select id="queryAllCollectionMenu" resultMap="collectionMenuMap">
+        select collection_menu.user_id as user_id,username,collection_menu.menu_id as menu_id,menu_name,whether
+        from collection_menu,user,menu
+        <where>
+            user.user_id=collection_menu.user_id and menu.menu_id=collection_menu.menu_id
+            <if test="userId != null">
+                and collection_menu.user_id=#{userId}
+            </if>
+            <if test="username != null">
+                and user.username like "%"#{username}"%"
+            </if>
+            <!-- 执行分页查询 -->
+            <if test="start != null and rows != null">
+                limit #{start},#{rows}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryCollectionMenuCount" resultType="int">
+        select count(*) from collection_menu,user
+        <where>
+            user.user_id=collection_menu.user_id
+            <if test="userId != null">
+                and collection_menu.user_id=#{userId}
+            </if>
+            <if test="username != null">
+                and user.username like "%"#{username}"%"
+            </if>
+        </where>
+    </select>
+
+
+
     <select id="queryCollectionMenuById" resultType="com.hstc.pojo.CollectionMenu">
         select username,menu_name,whether
         from collection_menu,menu,user
         where user.user_id=collection_menu.user_id and
-              menu.menu_id=collection_menu.menu_id and
-            collection_menu.user_id=#{userId}
+        menu.menu_id=collection_menu.menu_id and
+        collection_menu.user_id=#{userId}
         <!-- 执行分页查询 -->
         <if test="start !=null and rows != null">
             limit #{start},#{rows}
@@ -34,4 +76,5 @@
         select * from collection_menu
         where user_id=#{user_id} and menu_id=#{menu_id}
     </select>
+
 </mapper>

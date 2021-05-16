@@ -42,8 +42,7 @@
     <mvc:resources location="/js/" mapping="/js/**" />
     <mvc:resources location="/css/" mapping="/css/**" />
     <mvc:resources location="/fonts/" mapping="/fonts/**" />
-    <mvc:resources location="/img/" mapping="/img/**" />
-    <mvc:resources location="/i/" mapping="/i/**" />
+    <mvc:resources location="/images/" mapping="/images/**" />
 
     <!-- 3.配置jsp 显示ViewResolver视图解析器 -->
     <bean id="viewResolver"
@@ -69,8 +68,7 @@
             <mvc:exclude-mapping path="/js/**" />
             <mvc:exclude-mapping path="/css/**" />
             <mvc:exclude-mapping path="/fons/**" />
-            <mvc:exclude-mapping path="/img/**" />
-            <mvc:exclude-mapping path="/i/**" />
+            <mvc:exclude-mapping path="/images/**" />
             <bean class="com.hstc.interceptor.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

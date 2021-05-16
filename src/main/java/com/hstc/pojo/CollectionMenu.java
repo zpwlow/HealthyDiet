@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class CollectionMenu {
     /*
     * 用户收藏菜谱记录
@@ -15,11 +15,11 @@ public class CollectionMenu {
     @Expose
     private String user_id; //用户id
     @Expose
-    private String username; //用户名
+    private String username;  //用户名
     @Expose
     private int menu_id; //菜谱id
     @Expose
-    private String menu_name;//菜谱名
+    private String menu_name;  //菜谱名
     @Expose
     private boolean whether; //是否收藏
 

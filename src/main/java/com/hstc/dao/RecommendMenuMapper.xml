@@ -3,6 +3,52 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.RecommendMenuMapper">
+
+    <resultMap id="recommendMenuMap" type="com.hstc.pojo.RecommendMenu">
+        <result property="user_id" column="user_id" />
+        <result property="username" column="username" />
+        <result property="menu_id" column="menu_id" />
+        <result property="menu_name" column="menu_name" />
+        <result property="time" column="time" />
+        <result property="whether" column="whether" />
+    </resultMap>
+
+    <select id="queryAllRecommendMenu" resultMap="recommendMenuMap">
+        select recommend_menu.user_id as user_id,username,recommend_menu.menu_id as menu_id,menu_name,time,whether
+        from recommend_menu,user,menu
+        <where>
+            user.user_id=recommend_menu.user_id and menu.menu_id=recommend_menu.menu_id
+            <if test="userId != null">
+                and recommend_menu.user_id=#{userId}
+            </if>
+            <if test="username != null">
+                and user.username like "%"#{username}"%"
+            </if>
+            <!-- 执行分页查询 -->
+            <if test="start != null and rows != null">
+                limit #{start},#{rows}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryRecommendMenuCount" resultType="int">
+        select count(*) from recommend_menu,user
+        <where>
+            user.user_id=recommend_menu.user_id
+            <if test="userId != null">
+                and recommend_menu.user_id=#{userId}
+            </if>
+            <if test="username != null">
+                and user.username like "%"#{username}"%"
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteRecommendMenu">
+        delete from recommend_menu
+        where user_id=#{userId} and menu_id=#{menuId} and time=#{time}
+    </delete>
+
     <insert id="addRecommendMenuMapper" parameterType="com.hstc.pojo.RecommendMenu">
         insert into recommend_menu
         values (#{user_id},#{menu_id},#{time},#{whether})
@@ -18,8 +64,8 @@
         select user.user_id, username,menu.menu_id,menu_name,time,whether
         from recommend_menu,user,menu
         where user.user_id=recommend_menu.user_id and
-              menu.menu_id=recommend_menu.menu_id and
-              user.user_id=#{userId}
+        menu.menu_id=recommend_menu.menu_id and
+        user.user_id=#{userId}
         <!-- 执行分页查询 -->
         <if test="start !=null and rows != null">
             limit #{start},#{rows}
@@ -30,5 +76,6 @@
             resultType="Integer">
         select count(*) from recommend_menu where user_id like #{userId}
     </select>
+
 
 </mapper>

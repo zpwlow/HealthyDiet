@@ -17,6 +17,33 @@ public class DailyEnergyServiceImpl implements DailyEnergyService {
     @Autowired
     private DailyEnergyMapper dailyEnergyMapper;
 
+    @Override
+    public Page<DailyEnergy> queryAllDailyEnergy(int page, int rows, String userId, String username) {
+        int start = page * rows;
+        // 查询用户列表
+        List<DailyEnergy> dailyEnergyList = dailyEnergyMapper.queryAllDailyEnergy(start, rows, userId, username);
+        // 查询用户列表总记录数
+        int total = queryDailyEnergyCount(userId, username);
+        // 创建Page返回对象
+        Page<DailyEnergy> result = new Page<>();
+        result.setStart(page);
+        result.setCount(rows);
+        result.setRows(dailyEnergyList);
+        result.setTotal(total);
+        return result;
+    }
+
+    @Override
+    public int queryDailyEnergyCount(String userId, String username) {
+        return this.dailyEnergyMapper.queryDailyEnergyCount(userId, username);
+    }
+
+    @Override
+    public int deleteDailyEnergy(String userId, String time) {
+        return this.dailyEnergyMapper.deleteDailyEnergy(userId, time);
+    }
+
+
     /*
     * 根据用户id查询用户的每日能量信息并进行分页
     * */

@@ -17,6 +17,32 @@ public class RecommendMenuServiceImpl implements RecommendMenuService {
     @Autowired
     private RecommendMenuMapper recommendMenuMapper;
 
+    @Override
+    public Page<RecommendMenu> queryAllRecommendMenu(int page, int rows, String userId, String username) {
+        int start = page * rows;
+        // 查询用户列表
+        List<RecommendMenu> recommendMenuList = recommendMenuMapper.queryAllRecommendMenu(start, rows, userId, username);
+        // 查询用户列表总记录数
+        int total = queryRecommendMenuCount(userId, username);
+        // 创建Page返回对象
+        Page<RecommendMenu> result = new Page<>();
+        result.setStart(page);
+        result.setCount(rows);
+        result.setRows(recommendMenuList);
+        result.setTotal(total);
+        return result;
+    }
+
+    @Override
+    public int queryRecommendMenuCount(String userId, String username) {
+        return this.recommendMenuMapper.queryRecommendMenuCount(userId, username);
+    }
+
+    @Override
+    public int deleteRecommendMenu(String userId, int menuId, String time) {
+        return this.recommendMenuMapper.deleteRecommendMenu(userId,menuId,time);
+    }
+
     /*
      * 增加用户历史推荐菜谱记录
      * */

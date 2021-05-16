@@ -57,16 +57,7 @@ public class ControllerTest {
 
     }
 
-    /*
-    * 查询所有菜谱信息
-    * */
-    @Test
-    public void selectAllMenuTest(){
-        int page = 1;
-        int  rows = 10;
-        Page<Menu> menuPage = menuService.queryAllMenu(page, rows);
-        System.out.println(menuPage);
-    }
+
 
     /*
     * 根据菜谱id 删除菜谱

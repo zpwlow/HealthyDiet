@@ -1,14 +1,18 @@
 package com.hstc.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@JsonIgnoreProperties(value = "handler")
+public class User implements Serializable {
     @Expose
     private String user_id; //用户id
     @Expose

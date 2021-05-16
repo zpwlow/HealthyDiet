@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,11 +15,11 @@ public class RecommendMenu {
     @Expose
     private String user_id; //用户id
     @Expose
-    private String username;
+    private String username;  //用户名
     @Expose
     private int menu_id; //菜谱id
     @Expose
-    private String menu_name;
+    private String menu_name;  //菜谱名
     @Expose
     private String time;  //时间
     @Expose

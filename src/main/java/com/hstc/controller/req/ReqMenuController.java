@@ -2,14 +2,13 @@ package com.hstc.controller.req;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hstc.dao.RecommendMenuMapper;
 import com.hstc.pojo.Menu;
 import com.hstc.pojo.RecommendMenu;
 import com.hstc.pojo.User;
+import com.hstc.service.MenuService;
 import com.hstc.service.RecommendMenuService;
 import com.hstc.service.UserService;
 import com.hstc.utils.Result;
-import com.hstc.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -103,7 +102,7 @@ public class ReqMenuController {
      * 推荐用户每日食谱后保存数据库
      * */
     private void saveCollectionMenu(String userId, List<Menu> menuList){
-        java.util.Date date = new Date();
+        Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String datestr = format.format(date);
         for (Menu menu:menuList){

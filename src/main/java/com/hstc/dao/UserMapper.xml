@@ -3,21 +3,71 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hstc.dao.UserMapper">
+
+    <select id="queryAllUser" resultType="com.hstc.pojo.User">
+        select * from user
+        <where>
+            <if test="category != null">
+                convalescent = #{category}
+            </if>
+            <if test="username != null">
+                and username like "%"#{username}"%"
+            </if>
+        </where>
+        <!-- 执行分页查询 -->
+        <if test="start != null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="queryUserCount" resultType="int">
+        select count(*) from user
+        <where>
+            <if test="category != null">
+                convalescent = #{category}
+            </if>
+            <if test="username != null">
+                and username like "%"#{username}"%"
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserById" resultType="com.hstc.pojo.User">
+        select * from user
+        where user_id=#{userId}
+    </select>
+
+    <select id="queryUserByName" resultType="com.hstc.pojo.User">
+        select * from user
+        where username like "%"#{username}"%"
+    </select>
+
+    <update id="updateUser" parameterType="com.hstc.pojo.User">
+        update user
+        set username = #{username},
+            sex = #{sex},
+            age = #{age},
+            height = #{height},
+            weight = #{weight},
+            flavor = #{flavor},
+            convalescent = #{convalescent},
+            medical_history = #{medical_history}
+        where user_id = #{user_id}
+    </update>
+
+    <delete id="deleteUserById">
+        delete from user
+        where user_id = #{userId}
+    </delete>
+
+
     <insert id="addUser" parameterType="com.hstc.pojo.User">
         insert into user
         values (#{user_id},#{username},#{sex},#{age},
                 #{height},#{weight},#{flavor},
                 #{convalescent},#{medical_history})
     </insert>
-    
-    <update id="updateUser" parameterType="com.hstc.pojo.User">
-        update user
-        set username = #{username},sex = #{sex},age = #{age},
-            height = #{height},weight = #{weight},flavor = #{flavor},
-            convalescent = #{convalescent},
-            medical_history = #{medical_history}
-        where user_id = #{user_id}
-    </update>
+
 
     <select id="selectUserById" resultType="com.hstc.pojo.User">
         select * from user
@@ -36,8 +86,6 @@
         select count(*) from user
     </select>
 
-    <delete id="deleteUser" parameterType="int">
-        delete from user where user_id = #{userId}
-    </delete>
+
 
 </mapper>

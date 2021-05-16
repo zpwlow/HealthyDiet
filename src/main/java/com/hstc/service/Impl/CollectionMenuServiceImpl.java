@@ -51,5 +51,31 @@ public class CollectionMenuServiceImpl implements CollectionMenuService {
         return collectionMenuMapper.queryCollectionMenu(collectionMenu);
     }
 
+    @Override
+    public Page<CollectionMenu> queryAllCollectionMenu(int page, int rows, String userId, String username) {
+        int start = page * rows;
+        // 查询用户列表
+        List<CollectionMenu> collectionMenuList = collectionMenuMapper.queryAllCollectionMenu(start, rows, userId, username);
+        // 查询用户列表总记录数
+        int total = queryCollectionMenuCount(userId, username);
+        // 创建Page返回对象
+        Page<CollectionMenu> result = new Page<>();
+        result.setStart(page);
+        result.setCount(rows);
+        result.setRows(collectionMenuList);
+        result.setTotal(total);
+        return result;
+    }
+
+    @Override
+    public int queryCollectionMenuCount(String userId, String username) {
+        return this.collectionMenuMapper.queryCollectionMenuCount(userId, username);
+    }
+
+    @Override
+    public Integer deleteCollectionMenu(CollectionMenu collectionMenu) {
+        return collectionMenuMapper.deleteCollectionMenu(collectionMenu);
+    }
+
 
 }

@@ -1,19 +1,22 @@
 package com.hstc.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Menu {
+@JsonIgnoreProperties(value = "handler")
+public class Menu implements Serializable {
     /*
-    * 菜谱
-    * */
+     * 菜谱
+     * */
     @Expose
     private int menu_id;
     @Expose
@@ -38,5 +41,4 @@ public class Menu {
     private List<MenuNutrient> menuNutrientList;
     @Expose
     private List<MenuMake> menuMakeList;
-
 }

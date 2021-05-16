@@ -2,26 +2,31 @@ package com.hstc.service;
 
 import com.hstc.pojo.Menu;
 import com.hstc.utils.Page;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface MenuService {
 
-    //查询所有Menu,返回一个List
-    Page<Menu> queryAllMenu(Integer page, Integer count);
+    //查询所有Menu，返回一个List
+    Page<Menu> queryAllMenu(int page, int rows, String category, String menuName);
 
-    //根据菜谱名查询，返回一个Menu
+    //查询Menu总数
+    int queryMenuCount(String category, String menuName);
+
+
+    //根据Menu名称进行模糊查询
     List<Menu> queryMenuByName(String menuName);
 
-    //根据id删除一个Menu
-    int deleteMenuById(int id);
+    //修改Menu数据
+    Integer updateMenu(Menu menu);
+
+    //根据Menu的id删除Menu数据
+    Integer deleteMenuById(int menuId);
+
+
 
     //增加一个菜谱
-    int addMenu(Menu menu);
-
-    //更新Menu
-    int updateMenu(Menu menu);
+    Integer addMenu(Menu menu);
 
     //推荐用户菜谱
     List<Menu> recommendMenuList(String diseases, String flavor);
@@ -31,4 +36,5 @@ public interface MenuService {
 
     //根据菜谱id 查询菜谱
     Menu queryMenuById(Integer menuId);
+
 }

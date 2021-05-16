@@ -3,9 +3,17 @@ package com.hstc.service;
 import com.hstc.pojo.DailyEnergy;
 import com.hstc.utils.Page;
 
-import java.util.List;
-
 public interface DailyEnergyService {
+
+    //根据用户id和用户名查询每日能量记录
+    Page<DailyEnergy> queryAllDailyEnergy(int page, int rows, String userId, String username);
+
+    //根据用户id和用户名查询每日能量记录总数
+    int queryDailyEnergyCount(String userId, String username);
+
+    //根据用户id和时间删除每日能量记录
+    int deleteDailyEnergy(String userId, String time);
+
     //根据用户id查询用户的每日能量信息
     Page<DailyEnergy> queryDailyEnergyById(String userId, int start, int count);
 

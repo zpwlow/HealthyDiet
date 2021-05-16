@@ -8,6 +8,15 @@ import java.util.List;
 
 public interface NutritionRecordService {
 
+    //根据用户id和用户名查询营养记录
+    Page<NutritionRecord> queryAllNutritionRecord(int page, int rows, String userId, String username);
+
+    //根据用户id和用户名查询营养记录总数
+    int queryNutritionRecordCount(String userId, String username);
+
+    //根据用户id，营养素名和时间删除营养记录
+    int deleteNutritionRecord(String userId, String name, String time);
+
     //根据用户id查询用户的营养素表
     Page<NutritionRecord> queryNutritionRecordById(String userId, int start, int count);
 

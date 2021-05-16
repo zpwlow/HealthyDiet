@@ -17,6 +17,8 @@ public class DailyEnergy {
     @Expose
     private String user_id;  //用户id
     @Expose
+    private String username;  //用户名
+    @Expose
     private Double needed; //每日所需能量
     @Expose
     private Double consume; //每日消耗能量

@@ -5,15 +5,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Page<T> {
-	private int total;    // ×ÜÌõÊı
-	private int start;     // µ±Ç°Ò³
-	private int count;     // Ã¿Ò³Êı
-	private int totalPage;
-	private List<T> rows; // ½á¹û¼¯
+	private int start;     //å½“å‰éœ€è¦è¿›è¡Œæ˜¾ç¤ºçš„é¡µé¢
+	private int count;     //æ¯ä¸ªé¡µé¢æ˜¾ç¤ºçš„æ•°æ®æ¡æ•°
+	private int total;     //æ•°æ®åº“ä¸­çš„æ¡ç›®æ€»æ•°ï¼Œç”¨äºè®¡ç®—å…±æœ‰å¤šå°‘é¡µ
+	private int totalPage; //é€šè¿‡totalè®¡ç®—æ€»é¡µæ•°
+	private List<T> rows;  //æ•°æ®åˆ—è¡¨
 
 	public boolean isHasPreviouse(){
 		if(start==0)
@@ -27,10 +27,8 @@ public class Page<T> {
 	}
 
 	public int getTotalPage(){
-		// ¼ÙÉè×ÜÊıÊÇ50£¬ÊÇÄÜ¹»±»5Õû³ıµÄ£¬ÄÇÃ´¾ÍÓĞ10Ò³
 		if (0 == total % count)
 			totalPage = total /count;
-			// ¼ÙÉè×ÜÊıÊÇ51£¬²»ÄÜ¹»±»5Õû³ıµÄ£¬ÄÇÃ´¾ÍÓĞ11Ò³
 		else
 			totalPage = total / count + 1;
 
@@ -54,10 +52,8 @@ public class Page<T> {
 
 	public int getLast(){
 		int last;
-		// ¼ÙÉè×ÜÊıÊÇ50£¬ÊÇÄÜ¹»±»5Õû³ıµÄ£¬ÄÇÃ´×îºóÒ»Ò³µÄ¿ªÊ¼¾ÍÊÇ45
 		if (0 == total % count)
 			last = total - count;
-			// ¼ÙÉè×ÜÊıÊÇ51£¬²»ÄÜ¹»±»5Õû³ıµÄ£¬ÄÇÃ´×îºóÒ»Ò³µÄ¿ªÊ¼¾ÍÊÇ50
 		else
 			last = total - total % count;
 		last = last<0?0:last;

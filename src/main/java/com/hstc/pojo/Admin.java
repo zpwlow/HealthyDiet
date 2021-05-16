@@ -15,4 +15,9 @@ public class Admin {
     private String userName; //账号
     private String password; //密码
     private int state;  //状态：1为正常，0为异常
+
+    public Admin(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 }

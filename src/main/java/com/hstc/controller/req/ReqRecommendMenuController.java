@@ -64,7 +64,7 @@ public class ReqRecommendMenuController {
     }
 
     private void saveNutrition(RecommendMenu recommendMenu, List<MenuNutrient> menuNutrientList) {
-        java.util.Date date = new Date();
+        Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String datestr = format.format(date);
         for (MenuNutrient menuNutrient:menuNutrientList){

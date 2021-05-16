@@ -38,40 +38,67 @@
                     foreignColumn="menuId"
                     select="com.hstc.dao.MenuMakeMapper.getMenuMakeListByMid"
                     fetchType="lazy"/>
-
     </resultMap>
 
-    <select id="queryMenuByName"  resultMap="menuMap">
-        select *
-        from menu
-        where menu_name like #{menuName}
-            limit 0,50
-    </select>
-
-    <select id="queryAllMenu"  resultMap="menuMap">
-        select *
-        from menu
+    <select id="queryAllMenu" resultMap="menuMap">
+        select * from menu
+        <where>
+            <if test="category != null">
+                diseases = #{category}
+            </if>
+            <if test="menuName != null">
+                and menu_name like "%"#{menuName}"%"
+            </if>
+        </where>
         <!-- 执行分页查询 -->
-        <if test="start !=null and rows != null">
+        <if test="start != null and rows != null">
             limit #{start},#{rows}
         </if>
     </select>
 
-    <select id="queryMenuById" resultMap="menuMap">
-        select *
-        from menu
+    <select id="queryMenuCount" resultType="Integer">
+        select count(*) from menu
+        <where>
+            <if test="category != null">
+                diseases = #{category}
+            </if>
+            <if test="menuName != null">
+                and menu_name like "%"#{menuName}"%"
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryMenuByName" resultMap="menuMap">
+        select * from menu
+        where menu_name like "%"#{menuName}"%"
+    </select>
+
+    <update id="updateMenu" parameterType="com.hstc.pojo.Menu">
+        update menu
+        set menu_name=#{menu_name},
+            flavor=#{flavor},
+            calorie=#{calorie},
+            technology=#{technology},
+            make_time=#{make_time},
+            diseases=#{diseases},
+            menu_url=#{menu_url}
+        where menu_id=#{menu_id}
+    </update>
+
+    <delete id="deleteMenuById">
+        delete from menu
         where menu_id=#{menuId}
+    </delete>
+
+
+
+
+
+    <!-- 查询菜谱总数 -->
+    <select id="selectMenuListCount" resultType="Integer">
+        select count(*) from menu
     </select>
-
-    <select id="queryCollectionMenuList" resultMap="menuMap">
-        select menu.menu_id,menu_name,flavor,calorie,
-               technology,make_time,diseases,menu_url
-        from menu,collection_menu
-        where menu.menu_id=collection_menu.menu_id
-          and collection_menu.user_id=#{userId}
-    </select>
-
-
 
     <select id="recommendMenuList" resultMap="menuMap">
         select *
@@ -90,28 +117,23 @@
         ORDER BY RAND() LIMIT 0,5
     </select>
 
-    <!-- 根据删除菜谱 -->
-    <delete id="deleteMenuById" parameterType="int">
-        delete from menu where menu_id=#{menuId}
-    </delete>
-
     <insert id="addMenu" parameterType="com.hstc.pojo.Menu">
         insert into menu values (null ,#{menu_id},#{menu_name}
-        ,#{flavor},#{calorie},#{technology}
-        ,#{make_time},#{diseases},#{manu_url})
+                                ,#{flavor},#{calorie},#{technology}
+                                ,#{make_time},#{diseases},#{manu_url})
     </insert>
 
-    <update id="updateMenu" parameterType="com.hstc.pojo.Menu">
-        update menu set menu_name=#{menu_name}
-                      ,flavor=#{flavor},calorie=#{calorie}
-                      ,technology=#{technology},make_time=#{make_time}
-                      ,diseases=#{diseases},manu_url=#{manu_url}
-        where menu_id=#{menu_id}
-    </update>
-
-    <!-- 查询菜谱总数 -->
-    <select id="selectMenuListCount" resultType="Integer">
-        select count(*) from menu
+    <select id="queryCollectionMenuList" resultMap="menuMap">
+        select menu.menu_id,menu_name,flavor,calorie,
+               technology,make_time,diseases,menu_url
+        from menu,collection_menu
+        where menu.menu_id=collection_menu.menu_id
+          and collection_menu.user_id=#{userId}
     </select>
 
+    <select id="queryMenuById" resultMap="menuMap">
+        select *
+        from menu
+        where menu_id=#{menuId}
+    </select>
 </mapper>

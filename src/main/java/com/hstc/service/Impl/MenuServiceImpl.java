@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service("menuService")
@@ -17,55 +18,53 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;
 
-    /*
-    * 查询所有菜谱做分页
-    * */
     @Override
-    public Page<Menu> queryAllMenu(Integer page, Integer count) {
-        // 查询客户列表
-        List<Menu> menuList = menuMapper.queryAllMenu(page,count);
-        // 查询客户列表总记录数
-        Integer total = menuMapper.selectMenuListCount();
+    public Page<Menu> queryAllMenu(int page, int rows, String category, String menuName) {
+        int start = page * rows;
+        // 查询菜谱列表
+        List<Menu> menuList = menuMapper.queryAllMenu(start, rows, category, menuName);
+
+        // 查询菜谱列表总记录数
+        int total = queryMenuCount(category, menuName);
         // 创建Page返回对象
         Page<Menu> result = new Page<>();
         result.setStart(page);
+        result.setCount(rows);
         result.setRows(menuList);
-        result.setCount(count);
         result.setTotal(total);
         return result;
     }
 
-    /*
-    * 根据菜谱名查询菜谱
-    * */
+    @Override
+    public int queryMenuCount(String category, String menuName) {
+        return this.menuMapper.queryMenuCount(category, menuName);
+    }
+
+
     @Override
     public List<Menu> queryMenuByName(String menuName) {
-        return menuMapper.queryMenuByName(menuName);
+        return this.menuMapper.queryMenuByName(menuName);
     }
 
-    /*
-    * 根据菜谱id删除菜谱
-    * */
     @Override
-    public int deleteMenuById(int id) {
-        return menuMapper.deleteMenuById(id);
+    public Integer updateMenu(Menu menu) {
+        return this.menuMapper.updateMenu(menu);
     }
 
-    /*
-    * 添加菜谱
-    * */
     @Override
-    public int addMenu(Menu menu) {
+    public Integer deleteMenuById(int menuId) {
+        return this.menuMapper.deleteMenuById(menuId);
+    }
+
+
+    /*
+     * 添加菜谱
+     * */
+    @Override
+    public Integer addMenu(Menu menu) {
         return menuMapper.addMenu(menu);
     }
 
-    /*
-    * 修改菜谱
-    * */
-    @Override
-    public int updateMenu(Menu menu) {
-        return menuMapper.updateMenu(menu);
-    }
 
     @Override
     public List<Menu> recommendMenuList(String diseases, String flavor) {
