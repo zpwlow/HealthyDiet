@@ -17,6 +17,9 @@ public interface MenuMapper {
     //根据Menu名称进行模糊查询
     List<Menu> queryMenuByName(@Param("menuName") String menuName);
 
+    //根据Menu名称进行模糊查询
+    List<Menu> queryUserMenuByName(@Param("menuName") String menuName);
+
     //修改Menu数据
     Integer updateMenu(Menu menu);
 

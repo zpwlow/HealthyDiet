@@ -56,6 +56,10 @@ public class MenuServiceImpl implements MenuService {
         return this.menuMapper.deleteMenuById(menuId);
     }
 
+    @Override
+    public List<Menu> queryUserMenuByName(String menuName) {
+        return menuMapper.queryUserMenuByName(menuName);
+    }
 
     /*
      * 添加菜谱

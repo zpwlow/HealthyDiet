@@ -74,6 +74,12 @@
         where menu_name like "%"#{menuName}"%"
     </select>
 
+    <select id="queryUserMenuByName" resultMap="menuMap">
+        select * from menu
+        where menu_name like #{menuName}
+        limit 0,30
+    </select>
+
     <update id="updateMenu" parameterType="com.hstc.pojo.Menu">
         update menu
         set menu_name=#{menu_name},

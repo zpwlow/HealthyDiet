@@ -23,7 +23,8 @@ public interface MenuService {
     //根据Menu的id删除Menu数据
     Integer deleteMenuById(int menuId);
 
-
+    //根据Menu名称进行模糊查询
+    List<Menu> queryUserMenuByName(String menuName);
 
     //增加一个菜谱
     Integer addMenu(Menu menu);

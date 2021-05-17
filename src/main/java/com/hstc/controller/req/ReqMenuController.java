@@ -48,7 +48,7 @@ public class ReqMenuController {
     @RequestMapping(value = "/queryByMname",method = RequestMethod.GET)
     public String selectMenuByName(@RequestParam("name") String name){
         String menuName = "%" + name +"%";
-        List<Menu> menuList = menuService.queryMenuByName(menuName);
+        List<Menu> menuList = menuService.queryUserMenuByName(menuName);
         Result result;
         if(menuList == null || menuList.size()==0){
             result = new Result(404,"失败",null);

@@ -42,6 +42,9 @@ public class ReqDailyEnergyController {
     public String updateDailyEnergy(@RequestParam String dailyEnergyinfo){
         DailyEnergy dailyEnergy = gson.fromJson(dailyEnergyinfo, DailyEnergy.class);
         int i = dailyEnergyService.updateDailyEnergy(dailyEnergy);
+        if (i !=1){
+            i = dailyEnergyService.addDailyEnergy(dailyEnergy);
+        }
         return getString(i);
     }
 
