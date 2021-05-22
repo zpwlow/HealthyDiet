@@ -71,12 +71,21 @@ public class ReqRecommendMenuController {
             NutritionRecord nutritionRecord =
                     new NutritionRecord(recommendMenu.getUser_id(),
                             menuNutrient.getName(),
-                            Double.parseDouble(menuNutrient.getWeight()), datestr);
+                            getNetritionNum(menuNutrient.getWeight()), datestr);
             int i1 = nutritionRecordService.updateNutritionRecord(nutritionRecord);
             if(i1 != 1){
                 nutritionRecordService.addNutritionRecord(nutritionRecord);
             }
         }
+    }
+
+    private double getNetritionNum(String weight){
+        if(weight.equals("一")){
+            return 0.0;
+        }else {
+            return Double.parseDouble(weight);
+        }
+
     }
 
     private String getString(int i) {
