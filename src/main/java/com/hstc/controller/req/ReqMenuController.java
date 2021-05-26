@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -67,8 +68,21 @@ public class ReqMenuController {
      * */
     @RequestMapping(value = "/queryBreakfast", method = RequestMethod.GET)
     public String querBreakfast(@RequestParam("userId") String userId){
-        List<Menu> menuList = menuService.recommendMenuList("早餐", null);
-        saveCollectionMenu(userId,menuList);
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datestr = format.format(date)+"-07";
+        List<RecommendMenu> recommendMenuList =
+                recommendMenuService.queryRecommendMenuByIdTime(userId, datestr);
+        List<Menu> menuList = new ArrayList<Menu>();
+        if (recommendMenuList ==null || recommendMenuList.size()==0) {
+            menuList = menuService.recommendMenuList("早餐", null);
+            saveCollectionMenu(userId, datestr, menuList);
+        }else {
+            for (RecommendMenu recommendMenu:recommendMenuList){
+                Menu menu = menuService.queryMenuById(recommendMenu.getMenu_id());
+                menuList.add(menu);
+            }
+        }
         return getMenuJson(menuList);
     }
 
@@ -77,38 +91,82 @@ public class ReqMenuController {
      * */
     @RequestMapping(value = "/queryLunch", method = RequestMethod.GET)
     public String queryLunch(@RequestParam("userId") String userId){
-        User user = userService.selectUserById(userId);
-        System.out.println(user);
-        String diseases = user.getConvalescent();
-        String medical_history = user.getMedical_history();
-        String flavor = user.getFlavor();
-        if(diseases.equals("无")){
-            diseases=null;
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datestr = format.format(date)+"-12";
+        List<RecommendMenu> recommendMenuList =
+                recommendMenuService.queryRecommendMenuByIdTime(userId, datestr);
+        List<Menu> menuList = new ArrayList<Menu>();
+        if (recommendMenuList ==null || recommendMenuList.size()==0) {
+            User user = userService.selectUserById(userId);
+            System.out.println(user);
+            String diseases = user.getConvalescent();
+            String medical_history = user.getMedical_history();
+            String flavor = user.getFlavor();
+            if (diseases.equals("无")) {
+                diseases = null;
+            }
+            flavor = "%" + flavor + "%";
+            System.out.println("diseases" + diseases + "   flavor:" + flavor);
+            menuList = menuService.recommendMenuList(diseases, flavor);
+            if (menuList == null || menuList.size() == 0) {
+                menuList = menuService.recommendMenuList(null, flavor);
+            }
+            saveCollectionMenu(userId, datestr, menuList);
+        }else {
+            for (RecommendMenu recommendMenu:recommendMenuList){
+                Menu menu = menuService.queryMenuById(recommendMenu.getMenu_id());
+                menuList.add(menu);
+            }
         }
-        if(Objects.equals(diseases, "无") && !medical_history.equals("无")){
-            diseases = medical_history;
+        return getMenuJson(menuList);
+    }
+
+    /*
+    * 用户推荐晚餐
+    * */
+    @RequestMapping(value = "/queryDinner", method = RequestMethod.GET)
+    public String queryDinner(@RequestParam("userId") String userId) {
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datestr = format.format(date)+"-18";
+        List<RecommendMenu> recommendMenuList =
+                recommendMenuService.queryRecommendMenuByIdTime(userId, datestr);
+        List<Menu> menuList = new ArrayList<Menu>();
+        if (recommendMenuList ==null || recommendMenuList.size()==0) {
+            User user = userService.selectUserById(userId);
+            System.out.println(user);
+            String diseases = user.getConvalescent();
+            String medical_history = user.getMedical_history();
+            String flavor = user.getFlavor();
+            if (medical_history.equals("无")) {
+                diseases = null;
+            }else {
+                diseases = medical_history;
+            }
+            flavor = "%" + flavor + "%";
+            System.out.println("diseases" + diseases + "   flavor:" + flavor);
+            menuList = menuService.recommendMenuList(diseases, flavor);
+            if (menuList == null || menuList.size() == 0) {
+                menuList = menuService.recommendMenuList(null, flavor);
+            }
+            saveCollectionMenu(userId, datestr, menuList);
+        }else {
+            for (RecommendMenu recommendMenu:recommendMenuList){
+                Menu menu = menuService.queryMenuById(recommendMenu.getMenu_id());
+                menuList.add(menu);
+            }
         }
-        flavor = "%" +flavor +"%";
-        System.out.println("diseases"+diseases+"   flavor:" +flavor);
-        List<Menu> menuList = menuService.recommendMenuList(diseases, flavor);
-        if (menuList == null || menuList.size()==0){
-            menuList = menuService.recommendMenuList(null, flavor);
-        }
-        saveCollectionMenu(userId,menuList);
         return getMenuJson(menuList);
     }
 
     /*
      * 推荐用户每日食谱后保存数据库
      * */
-    private void saveCollectionMenu(String userId, List<Menu> menuList){
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String datestr = format.format(date);
+    private void saveCollectionMenu(String userId,String datestr, List<Menu> menuList){
         for (Menu menu:menuList){
             RecommendMenu recommendMenu =
                     new RecommendMenu(userId, menu.getMenu_id(), datestr, false);
-
             recommendMenuService.addRecommendMenuMapper(recommendMenu);
         }
     }

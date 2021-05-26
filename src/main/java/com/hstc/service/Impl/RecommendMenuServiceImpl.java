@@ -77,4 +77,9 @@ public class RecommendMenuServiceImpl implements RecommendMenuService {
         return recommendMenuMapper.updateRecommendMenu(recommendMenu);
     }
 
+    @Override
+    public List<RecommendMenu> queryRecommendMenuByIdTime(String userId, String time) {
+        return recommendMenuMapper.queryRecommendMenuByIdTime(userId,time);
+    }
+
 }

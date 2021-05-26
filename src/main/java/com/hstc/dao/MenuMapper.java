@@ -27,6 +27,8 @@ public interface MenuMapper {
     Integer deleteMenuById(@Param("menuId") int menuId);
 
 
+    //获取当天的推荐菜谱
+//    List<Menu> queryrecommendMenuList();
 
     // 菜谱数
     Integer selectMenuListCount();

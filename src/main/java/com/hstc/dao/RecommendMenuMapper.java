@@ -19,6 +19,10 @@ public interface RecommendMenuMapper {
     //增加用户历史推荐菜谱记录
     Integer addRecommendMenuMapper(RecommendMenu recommendMenu);
 
+    //根据用户id和时间查看推荐菜谱
+    List<RecommendMenu> queryRecommendMenuByIdTime(@Param("userId") String userId,
+                                                   @Param("time") String time);
+
     //修改用户历史推荐菜谱记录
     Integer updateRecommendMenu(RecommendMenu recommendMenu);
 

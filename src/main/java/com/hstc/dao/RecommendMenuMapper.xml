@@ -44,6 +44,12 @@
         </where>
     </select>
 
+    <select id="queryRecommendMenuByIdTime" resultType="com.hstc.pojo.RecommendMenu">
+        select user_id, menu_id
+        from recommend_menu
+        where user_id=#{userId} and time=#{time}
+    </select>
+
     <delete id="deleteRecommendMenu">
         delete from recommend_menu
         where user_id=#{userId} and menu_id=#{menuId} and time=#{time}
@@ -57,7 +63,7 @@
     <update id="updateRecommendMenu" parameterType="com.hstc.pojo.RecommendMenu">
         update recommend_menu
         set whether=#{whether}
-        where user_id=#{user_id} and menu_id=#{menu_id} and time=#{time}
+        where user_id=#{user_id} and menu_id=#{menu_id} and time like #{time}
     </update>
 
     <select id="queryRecommendMenuMapperById" resultType="com.hstc.pojo.RecommendMenu">

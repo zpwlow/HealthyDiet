@@ -2,6 +2,9 @@ package com.hstc.service;
 
 import com.hstc.pojo.RecommendMenu;
 import com.hstc.utils.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RecommendMenuService {
 
@@ -22,4 +25,7 @@ public interface RecommendMenuService {
 
     //修改用户历史推荐菜谱记录
     Integer updateRecommendMenu(RecommendMenu recommendMenu);
+
+    //根据用户id和时间查看推荐菜谱
+    List<RecommendMenu> queryRecommendMenuByIdTime(String userId, String time);
 }

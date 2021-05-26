@@ -110,14 +110,10 @@
         select *
         from menu
         where
-        <if test="diseases != null and flavor != null">
+        <if test="diseases != null">
             diseases=#{diseases} and flavor like #{flavor}
         </if>
-
-        <if test="diseases != null and flavor == null">
-            diseases=#{diseases}
-        </if>
-        <if test="diseases == null and flavor != null ">
+        <if test="diseases == null ">
             flavor like #{flavor}
         </if>
         ORDER BY RAND() LIMIT 0,5

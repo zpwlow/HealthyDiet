@@ -48,6 +48,9 @@ public class ReqRecommendMenuController {
     public String updateRecommendMenu(@RequestParam String recommendMenuinfo){
         RecommendMenu recommendMenu =
                 gson.fromJson(recommendMenuinfo, RecommendMenu.class);
+        String time = recommendMenu.getTime();
+        String time1 = time+"%";
+        recommendMenu.setTime(time1);
         System.out.println(recommendMenu);
         Integer i = recommendMenuService.updateRecommendMenu(recommendMenu);
         Menu menu = menuService.queryMenuById(recommendMenu.getMenu_id());
@@ -55,6 +58,7 @@ public class ReqRecommendMenuController {
         if (i == 1){
             saveNutrition(recommendMenu,  menuNutrientList);
         }else {
+            recommendMenu.setTime(time);
             Integer integer = recommendMenuService.addRecommendMenuMapper(recommendMenu);
             if (integer==1){
                 saveNutrition(recommendMenu,  menuNutrientList);
