@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hstc.dao.CommentMapper">
+
+    <insert id="addComment" parameterType="com.hstc.pojo.Comment">
+        insert into comment values (null ,#{user_id),#{text} )
+    </insert>
+
+
+</mapper>
