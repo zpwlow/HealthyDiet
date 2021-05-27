@@ -1,5 +1,6 @@
 package com.hstc.pojo;
 
+import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    Integer id;
+    @Expose
+    int id;
+    @Expose
     String user_id;
+    @Expose
     String text;
 }
