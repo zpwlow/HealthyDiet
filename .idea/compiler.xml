@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="HealthyDiet" />
         <module name="demo" />
+        <module name="healthydiet" />
       </profile>
     </annotationProcessing>
   </component>

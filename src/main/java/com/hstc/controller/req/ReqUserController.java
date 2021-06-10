@@ -86,7 +86,7 @@ public class ReqUserController {
     /*
     * 获取用户OpenId
     * */
-    @RequestMapping(value = "/queryOpenId",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryOpenId")
     public String queryOpenId(@RequestParam String openIdinfo){
         OpenId openId = gson.fromJson(openIdinfo, OpenId.class);
         System.out.println(openId);
